@@ -1,0 +1,4267 @@
+' Modu³ 1
+
+Sub RozpocznijGre()
+' RozpocznijGrê Makro
+' Uruchomienie tego makra powoduje rozpoczêcie gry
+
+    TworzenieDruzyny
+    Poziom1
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom2
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom3
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom4
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom5
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        PoziomSerceLasu
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        DodatkowePunkty
+        Awans
+        ZdarzenieLosowe
+        ZdarzenieLosowe
+        ZdarzenieLosowe
+        Poziom6
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom7
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom8
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom9
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        Poziom10
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        Awans
+        ZdarzenieLosowe
+        PoziomLegowiskoSmoka
+    End If
+    If CzyDruzynaAktywna = "Aktywna" Then
+        DodatkowePunkty
+        Awans
+        NapisyKoncowe
+    End If
+    KoniecGry
+    Czyszczenie
+End Sub
+
+' Modu³ 2
+
+Function RasaPostaci() As String
+PoczatekWyborRasy:
+    Rasa = MsgBox("Czy postaæ to elf?", vbYesNo)
+    If Rasa = vbYes Then RasaPostaci = "Elf"
+    If Rasa = vbYes Then GoTo KoniecWyborRasy
+    If Rasa = vbNo Then Rasa = MsgBox("Czy postaæ to krasnolud?", vbYesNo)
+    If Rasa = vbYes Then RasaPostaci = "Krasnolud"
+    If Rasa = vbYes Then GoTo KoniecWyborRasy
+    If Rasa = vbNo Then Rasa = MsgBox("Czy postaæ to ork?", vbYesNo)
+    If Rasa = vbYes Then RasaPostaci = "Ork"
+    If Rasa = vbYes Then GoTo KoniecWyborRasy
+    If Rasa = vbNo Then Rasa = MsgBox("Czy postaæ to cz³owiek?", vbYesNo)
+    If Rasa = vbYes Then RasaPostaci = "Cz³owiek"
+    If Rasa = vbYes Then GoTo KoniecWyborRasy
+    If Rasa = vbNo Then GoTo PoczatekWyborRasy
+KoniecWyborRasy:
+End Function
+
+' Modu³ 3
+
+Sub TworzenieDruzyny()
+Start:
+    Sheets("Druzyna").Select
+    Druzyna = InputBox("Witaj graczu! Ile postaci bêdzie liczyæ Twoja dru¿yna? Podaj liczbê od 1 do 5:")
+    If Druzyna <> 1 And Druzyna <> 2 And Druzyna <> 3 And Druzyna <> 4 And Druzyna <> 5 Then MsgBox "Wybrales zly numer!"
+    If Druzyna <> 1 And Druzyna <> 2 And Druzyna <> 3 And Druzyna <> 4 And Druzyna <> 5 Then GoTo Start
+    MsgBox "Twoja dru¿yna bêdzie liczyæ " & Druzyna & " postaci."
+    KreacjaBohatera = 1
+' Tworzymy bohatera nr 1
+    MsgBox "Wybierz rasê postaci nr " & KreacjaBohatera & "."
+    Range("B4").Value = RasaPostaci
+    MsgBox "Postaæ nr " & KreacjaBohatera & " to " & Range("B4").Value
+    Range("B3").Value = InputBox("Podaj imiê postaci nr " & KreacjaBohatera)
+    If Range("B4").Value = "Elf" Then Range("B5").Value = 1
+    If Range("B4").Value = "Elf" Then Range("B6").Value = 3
+    If Range("B4").Value = "Elf" Then Range("B7").Value = 2
+    If Range("B4").Value = "Krasnolud" Then Range("B5").Value = 2
+    If Range("B4").Value = "Krasnolud" Then Range("B6").Value = 1
+    If Range("B4").Value = "Krasnolud" Then Range("B7").Value = 3
+    If Range("B4").Value = "Ork" Then Range("B5").Value = 3
+    If Range("B4").Value = "Ork" Then Range("B6").Value = 2
+    If Range("B4").Value = "Ork" Then Range("B7").Value = 1
+    If Range("B4").Value = "Cz³owiek" Then Range("B5").Value = 2
+    If Range("B4").Value = "Cz³owiek" Then Range("B6").Value = 2
+    If Range("B4").Value = "Cz³owiek" Then Range("B7").Value = 2
+    Range("B8").Value = 4 * (Range("B5").Value + Range("B7").Value)
+    Range("B9").Value = Range("B6").Value + Range("B7").Value
+    Range("B10").Value = 2 * Range("B5").Value + Range("B6").Value
+    Range("B11").Value = Range("B6").Value + Range("B7").Value
+    Range("B13").Value = 1
+    Range("B14").Value = 0
+    Range("B15").Value = 0
+    Range("B12").Value = WyborBroni
+    If Range("B12").Value = "Topór" Then Range("B10").Value = Range("B10").Value + 1
+    If Range("B12").Value = "W³ócznia" Then Range("B9").Value = Range("B9").Value + 1
+    If Range("B12").Value = "Miecz" Then Range("B11").Value = Range("B11").Value + 1
+    KreacjaBohatera = KreacjaBohatera + 1
+    If Druzyna = 1 Then GoTo LastLine2
+' Tworzymy bohatera nr 2
+    MsgBox "Wybierz rasê postaci nr " & KreacjaBohatera & "."
+    Range("D4").Value = RasaPostaci
+    MsgBox "Postaæ nr " & KreacjaBohatera & " to " & Range("D4").Value
+    Range("D3").Value = InputBox("Podaj imiê postaci nr " & KreacjaBohatera)
+    If Range("D4").Value = "Elf" Then Range("D5").Value = 1
+    If Range("D4").Value = "Elf" Then Range("D6").Value = 3
+    If Range("D4").Value = "Elf" Then Range("D7").Value = 2
+    If Range("D4").Value = "Krasnolud" Then Range("D5").Value = 2
+    If Range("D4").Value = "Krasnolud" Then Range("D6").Value = 1
+    If Range("D4").Value = "Krasnolud" Then Range("D7").Value = 3
+    If Range("D4").Value = "Ork" Then Range("D5").Value = 3
+    If Range("D4").Value = "Ork" Then Range("D6").Value = 2
+    If Range("D4").Value = "Ork" Then Range("D7").Value = 1
+    If Range("D4").Value = "Cz³owiek" Then Range("D5").Value = 2
+    If Range("D4").Value = "Cz³owiek" Then Range("D6").Value = 2
+    If Range("D4").Value = "Cz³owiek" Then Range("D7").Value = 2
+    Range("D8").Value = 4 * (Range("D5").Value + Range("D7").Value)
+    Range("D9").Value = Range("D6").Value + Range("D7").Value
+    Range("D10").Value = 2 * Range("D5").Value + Range("D6").Value
+    Range("D11").Value = Range("D6").Value + Range("D7").Value
+    Range("D13").Value = 1
+    Range("D14").Value = 0
+    Range("D15").Value = 0
+    Range("D12").Value = WyborBroni
+    If Range("D12").Value = "Topór" Then Range("D10").Value = Range("D10").Value + 1
+    If Range("D12").Value = "W³ócznia" Then Range("D9").Value = Range("D9").Value + 1
+    If Range("D12").Value = "Miecz" Then Range("D11").Value = Range("D11").Value + 1
+    KreacjaBohatera = KreacjaBohatera + 1
+    If Druzyna = 2 Then GoTo LastLine2
+' Tworzymy bohatera nr 3
+    MsgBox "Wybierz rasê postaci nr " & KreacjaBohatera & "."
+    Range("F4").Value = RasaPostaci
+    MsgBox "Postaæ nr " & KreacjaBohatera & " to " & Range("F4").Value
+    Range("F3").Value = InputBox("Podaj imiê postaci nr " & KreacjaBohatera)
+    If Range("F4").Value = "Elf" Then Range("F5").Value = 1
+    If Range("F4").Value = "Elf" Then Range("F6").Value = 3
+    If Range("F4").Value = "Elf" Then Range("F7").Value = 2
+    If Range("F4").Value = "Krasnolud" Then Range("F5").Value = 2
+    If Range("F4").Value = "Krasnolud" Then Range("F6").Value = 1
+    If Range("F4").Value = "Krasnolud" Then Range("F7").Value = 3
+    If Range("F4").Value = "Ork" Then Range("F5").Value = 3
+    If Range("F4").Value = "Ork" Then Range("F6").Value = 2
+    If Range("F4").Value = "Ork" Then Range("F7").Value = 1
+    If Range("F4").Value = "Cz³owiek" Then Range("F5").Value = 2
+    If Range("F4").Value = "Cz³owiek" Then Range("F6").Value = 2
+    If Range("F4").Value = "Cz³owiek" Then Range("F7").Value = 2
+    Range("F8").Value = 4 * (Range("F5").Value + Range("F7").Value)
+    Range("F9").Value = Range("F6").Value + Range("F7").Value
+    Range("F10").Value = 2 * Range("F5").Value + Range("F6").Value
+    Range("F11").Value = Range("F6").Value + Range("F7").Value
+    Range("F13").Value = 1
+    Range("F14").Value = 0
+    Range("F15").Value = 0
+    Range("F12").Value = WyborBroni
+    If Range("F12").Value = "Topór" Then Range("F10").Value = Range("F10").Value + 1
+    If Range("F12").Value = "W³ócznia" Then Range("F9").Value = Range("F9").Value + 1
+    If Range("F12").Value = "Miecz" Then Range("F11").Value = Range("F11").Value + 1
+    KreacjaBohatera = KreacjaBohatera + 1
+    If Druzyna = 3 Then GoTo LastLine2
+' Tworzymy bohatera nr 4
+    MsgBox "Wybierz rasê postaci nr " & KreacjaBohatera & "."
+    Range("H4").Value = RasaPostaci
+    MsgBox "Postaæ nr " & KreacjaBohatera & " to " & Range("H4").Value
+    Range("H3").Value = InputBox("Podaj imiê postaci nr " & KreacjaBohatera)
+    If Range("H4").Value = "Elf" Then Range("H5").Value = 1
+    If Range("H4").Value = "Elf" Then Range("H6").Value = 3
+    If Range("H4").Value = "Elf" Then Range("H7").Value = 2
+    If Range("H4").Value = "Krasnolud" Then Range("H5").Value = 2
+    If Range("H4").Value = "Krasnolud" Then Range("H6").Value = 1
+    If Range("H4").Value = "Krasnolud" Then Range("H7").Value = 3
+    If Range("H4").Value = "Ork" Then Range("H5").Value = 3
+    If Range("H4").Value = "Ork" Then Range("H6").Value = 2
+    If Range("H4").Value = "Ork" Then Range("H7").Value = 1
+    If Range("H4").Value = "Cz³owiek" Then Range("H5").Value = 2
+    If Range("H4").Value = "Cz³owiek" Then Range("H6").Value = 2
+    If Range("H4").Value = "Cz³owiek" Then Range("H7").Value = 2
+    Range("H8").Value = 4 * (Range("H5").Value + Range("H7").Value)
+    Range("H9").Value = Range("H6").Value + Range("H7").Value
+    Range("H10").Value = 2 * Range("H5").Value + Range("H6").Value
+    Range("H11").Value = Range("H6").Value + Range("H7").Value
+    Range("H13").Value = 1
+    Range("H14").Value = 0
+    Range("H15").Value = 0
+    Range("H12").Value = WyborBroni
+    If Range("H12").Value = "Topór" Then Range("H10").Value = Range("H10").Value + 1
+    If Range("H12").Value = "W³ócznia" Then Range("H9").Value = Range("H9").Value + 1
+    If Range("H12").Value = "Miecz" Then Range("H11").Value = Range("H11").Value + 1
+    KreacjaBohatera = KreacjaBohatera + 1
+    If Druzyna = 4 Then GoTo LastLine2
+' Tworzymy bohatera nr 5
+    MsgBox "Wybierz rasê postaci nr " & KreacjaBohatera & "."
+    Range("J4").Value = RasaPostaci
+    MsgBox "Postaæ nr " & KreacjaBohatera & " to " & Range("J4").Value
+    Range("J3").Value = InputBox("Podaj imiê postaci nr " & KreacjaBohatera)
+    If Range("J4").Value = "Elf" Then Range("J5").Value = 1
+    If Range("J4").Value = "Elf" Then Range("J6").Value = 3
+    If Range("J4").Value = "Elf" Then Range("J7").Value = 2
+    If Range("J4").Value = "Krasnolud" Then Range("J5").Value = 2
+    If Range("J4").Value = "Krasnolud" Then Range("J6").Value = 1
+    If Range("J4").Value = "Krasnolud" Then Range("J7").Value = 3
+    If Range("J4").Value = "Ork" Then Range("J5").Value = 3
+    If Range("J4").Value = "Ork" Then Range("J6").Value = 2
+    If Range("J4").Value = "Ork" Then Range("J7").Value = 1
+    If Range("J4").Value = "Cz³owiek" Then Range("J5").Value = 2
+    If Range("J4").Value = "Cz³owiek" Then Range("J6").Value = 2
+    If Range("J4").Value = "Cz³owiek" Then Range("J7").Value = 2
+    Range("J8").Value = 4 * (Range("J5").Value + Range("J7").Value)
+    Range("J9").Value = Range("J6").Value + Range("J7").Value
+    Range("J10").Value = 2 * Range("J5").Value + Range("J6").Value
+    Range("J11").Value = Range("J6").Value + Range("J7").Value
+    Range("J13").Value = 1
+    Range("J14").Value = 0
+    Range("J15").Value = 0
+    Range("J12").Value = WyborBroni
+    If Range("J12").Value = "Topór" Then Range("J10").Value = Range("J10").Value + 1
+    If Range("J12").Value = "W³ócznia" Then Range("J9").Value = Range("J9").Value + 1
+    If Range("J12").Value = "Miecz" Then Range("J11").Value = Range("J11").Value + 1
+LastLine2:
+    MsgBox "Dru¿yna:" & vbNewLine & _
+    Range("B4").Value & " " & Range("B3").Value & vbNewLine & _
+    Range("D4").Value & " " & Range("D3").Value & vbNewLine & _
+    Range("F4").Value & " " & Range("F3").Value & vbNewLine & _
+    Range("H4").Value & " " & Range("H3").Value & vbNewLine & _
+    Range("J4").Value & " " & Range("J3").Value & vbNewLine & _
+    "Gotowi do wêdrówki!"
+    Range("B3:B4").Select
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("C11").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("B12").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("C13").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("B8").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("C14").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("B13").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("C15").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("D3:D4").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("F11").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("D12").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("F13").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("D8").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("F14").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("D13").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("F15").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("F3:F4").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("I11").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("F12").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("I13").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("F8").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("I14").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("F13").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("I15").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("H3:H4").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("L11").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("H12").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("L13").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("H8").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("L14").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("H13").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("L15").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("J3:J4").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("O11").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("J12").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("O13").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("J8").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("O14").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("J13").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("O15").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("B9:B11").Select
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("C16").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("D9:D11").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("F16").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("F9:F11").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("I16").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("H9:H11").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("L16").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Druzyna").Select
+    Range("J9:J11").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Rozgrywka").Select
+    Range("O16").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Range("A1").Select
+        
+    Kolorowanie
+        
+End Sub
+
+' Modu³ 4
+
+Function WyborBroni() As String
+    MsgBox "Wybierz broñ dla postaci. Do wyboru masz topór (+1 do ataku), w³óczniê (+1 do reakcji) lub miecz (+1 do obrony)"
+PoczatekWyborBroni:
+    Bron = MsgBox("Czy wybierasz topór?", vbYesNo)
+    If Bron = vbYes Then WyborBroni = "Topór"
+    If Bron = vbYes Then GoTo KoniecWyborBroni
+    If Bron = vbNo Then Bron = MsgBox("Czy wybierasz w³óczniê?", vbYesNo)
+    If Bron = vbYes Then WyborBroni = "W³ócznia"
+    If Bron = vbYes Then GoTo KoniecWyborBroni
+    If Bron = vbNo Then Bron = MsgBox("Czy wybierasz miecz?", vbYesNo)
+    If Bron = vbYes Then WyborBroni = "Miecz"
+    If Bron = vbYes Then GoTo KoniecWyborBroni
+    If Bron = vbNo Then GoTo PoczatekWyborBroni
+KoniecWyborBroni:
+End Function
+
+' Modu³ 5
+
+Sub Poziom1()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 1
+    Range("A2").Value = "Jaskinia goblinów"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Goblin"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(4, 7)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(1, 4)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(1, 4)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(1, 4)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga banda goblinów. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+        LiczbaWrogow = Losuj(1, 6)
+        MsgBox "Nadci¹gaj¹ gobliny: " & LiczbaWrogow
+        Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+        If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+        If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+        If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+        If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+        Walka
+        CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ bandê goblinów!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom2()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 2
+    Range("A2").Value = "Krypta"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Szkielet"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(7, 11)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(2, 4)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(2, 4)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(2, 4)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga horda szkieletów. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ szkielety: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ hordê szkieletów!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom3()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 3
+    Range("A2").Value = "Cmentarzysko"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Zombie"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(9, 14)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(1, 3)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(2, 5)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(3, 6)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga horda zombie. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ zombie: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ hordê zombie!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom4()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 4
+    Range("A2").Value = "Las"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Wilk"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(5, 9)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(6, 12)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(3, 6)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(2, 5)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga wataha wilków. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ wilki: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ watahê wilków!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom5()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 5
+    Range("A2").Value = "Gêsty las"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "NiedŸwiedŸ"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(13, 17)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(2, 5)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(3, 8)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(3, 8)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga wataha niedŸwiedzi. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ niedŸwiedzie: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ watahê niedŸwiedzi!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub PoziomSerceLasu()
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 5
+    Range("A2").Value = "Serce lasu"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Wilko³ak"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(30, 40)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(16, 22)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(10, 13)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(6, 10)
+    Dim LiczbaTur As Integer
+    LiczbaTur = 1
+    MsgBox "Dotar³eœ do serca lasu. Musisz siê zmierzyæ z jego w³adc¹"
+    MsgBox "Nadci¹ga wilko³ak. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = 1
+    MsgBox "Nadci¹ga wilko³ak: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ wilko³aka!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom6()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 6
+    Range("A2").Value = "Równina"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Hobgoblin"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(13, 18)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(3, 6)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(7, 11)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(5, 9)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga banda hobgoblinów. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ hobgobliny: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ bandê hobgoblinów!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom7()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 7
+    Range("A2").Value = "Wzgórza"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Ogr"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(20, 25)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(5, 8)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(10, 13)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(6, 10)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga banda ogrów. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ ogry: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ bandê ogrów!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom8()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 8
+    Range("A2").Value = "Góry"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Troll"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(22, 26)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(3, 6)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(12, 15)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(7, 11)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga banda trolli. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ trolle: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ bandê ogrów!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+Sub Poziom9()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 9
+    Range("A2").Value = "Wysokie góry"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Kamienny golem"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(30, 35)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(1, 4)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(12, 16)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(15, 21)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga dru¿yna kamiennych golemów. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ kamienne golemy: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ dru¿ynê kamiennych golemów!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+
+Sub Poziom10()
+    Kolorowanie
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 10
+    Range("A2").Value = "Górska jaskinia"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Lodowy troll"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(15, 20)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(14, 18)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(15, 19)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(4, 9)
+    Dim LiczbaTur As Integer
+    LiczbaTur = Losuj(2, 5)
+    MsgBox "Nadci¹ga banda lodowych trolli. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = Losuj(1, 6)
+    MsgBox "Nadci¹gaj¹ lodowe trolle: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ bandê lodowych trolli!"
+    Sheets("Druzyna").Select
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Przygotuj siê na nastêpny poziom"
+End Sub
+
+
+Sub PoziomLegowiskoSmoka()
+    Sheets("Rozgrywka").Select
+    Range("B1").Value = 10
+    Range("A2").Value = "Legowisko smoka"
+    MsgBox "Wkraczasz w obszar: " & Range("A2").Value
+    
+    Dim LiczbaWrogow As Integer
+    Dim RasaWrog As String
+    RasaWrog = "Smok"
+    Dim StatusWrog As String
+    StatusWrog = "W pe³ni si³"
+    Dim ZywotnoscWrog As Integer
+    ZywotnoscWrog = Losuj(100, 101)
+    Dim ReakcjaWrog As Integer
+    ReakcjaWrog = Losuj(20, 21)
+    Dim AtakWrog As Integer
+    AtakWrog = Losuj(25, 26)
+    Dim ObronaWrog As Integer
+    ObronaWrog = Losuj(25, 26)
+    Dim LiczbaTur As Integer
+    LiczbaTur = 1
+    MsgBox "Dotar³eœ do legowiska smoka. Musisz siê zmierzyæ z jego w³adc¹"
+    MsgBox "Nadci¹ga smok. Przygotuj siê do walki!"
+    
+    For i = 1 To LiczbaTur
+    LiczbaWrogow = 1
+    MsgBox "Nadci¹ga smok: " & LiczbaWrogow
+    Wrog1 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 1 Then Wrog2 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 2 Then Wrog3 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 3 Then Wrog4 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    If LiczbaWrogow > 4 Then Wrog5 RasaWrog, StatusWrog, ZywotnoscWrog, ReakcjaWrog, AtakWrog, ObronaWrog
+    Walka
+    CzyscWrogow
+    Next
+        
+    If CzyDruzynaAktywna = "Aktywna" Then MsgBox "Pokona³eœ smoka!"
+    Sheets("Druzyna").Select
+End Sub
+
+' Modu³ 6
+
+Sub Czyszczenie()
+'
+' Czyszczenie Makro
+' Makro napisane na porzeby testów. Czyœci zbêdne komórki w ca³ym skoroszycie.
+'
+
+'
+    Sheets("Druzyna").Select
+    Range("B3:B15").Select
+    Selection.ClearContents
+    Range("D3:D15").Select
+    Selection.ClearContents
+    Range("F3:F15").Select
+    Selection.ClearContents
+    Range("H3:H15").Select
+    Selection.ClearContents
+    Range("J3:J15").Select
+    Selection.ClearContents
+    Range("A1").Select
+    Sheets("Rozgrywka").Select
+    Range("C11:C18").Select
+    Selection.ClearContents
+    Range("F11:F18").Select
+    Selection.ClearContents
+    Range("I11:I18").Select
+    Selection.ClearContents
+    Range("L11:L18").Select
+    Selection.ClearContents
+    Range("O11:O18").Select
+    Selection.ClearContents
+    Range("B1").Select
+    Selection.ClearContents
+    Range("A2").Select
+    Selection.ClearContents
+    Range("C4:C9").Select
+    Selection.ClearContents
+    Range("F4:F9").Select
+    Selection.ClearContents
+    Range("I4:I9").Select
+    Selection.ClearContents
+    Range("L4:L9").Select
+    Selection.ClearContents
+    Range("O4:O9").Select
+    Selection.ClearContents
+    ActiveWindow.SmallScroll Down:=-3
+    Range("A1:O18").Select
+    With Selection.Interior
+        .Pattern = xlNone
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Range("A1").Select
+    Sheets("Strona Tytulowa").Select
+    Range("A1").Select
+End Sub
+Sub Kolorowanie()
+'
+' Kolorowanie Makro
+' Makro koloruje karty postaci w zale¿noœci od punktów ¿ywotnoœci.
+'
+
+'
+    Sheets("Rozgrywka").Select
+    
+    Probnik = Range("C14").Value
+    If Probnik >= 11 Then
+    Range("B10:C18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 5296274
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 10 And Probnik >= 6 Then
+    Range("B10:C18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 5 And Probnik >= 1 Then
+    Range("B10:C18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 255
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+        
+    If Probnik <= 0 Then
+    Range("B10:C18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+        
+    Probnik = Range("F14").Value
+    If Probnik >= 11 Then
+    Range("E10:F18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 5296274
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 10 And Probnik >= 6 Then
+    Range("E10:F18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 5 And Probnik >= 1 Then
+    Range("E10:F18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 255
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 0 Then
+    Range("E10:F18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    Probnik = Range("I14").Value
+    If Probnik >= 11 Then
+    Range("H10:I18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 5296274
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 10 And Probnik >= 6 Then
+    Range("H10:I18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 5 And Probnik >= 1 Then
+    Range("H10:I18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 255
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 0 Then
+    Range("H10:I18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    Probnik = Range("L14").Value
+    If Probnik >= 11 Then
+    Range("K10:L18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 5296274
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 10 And Probnik >= 6 Then
+    Range("K10:L18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 5 And Probnik >= 1 Then
+    Range("K10:L18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 255
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 0 Then
+    Range("K10:L18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    Probnik = Range("O14").Value
+    If Probnik >= 11 Then
+    Range("N10:O18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 5296274
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 10 And Probnik >= 6 Then
+    Range("N10:O18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 5 And Probnik >= 1 Then
+    Range("N10:O18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 255
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    If Probnik <= 0 Then
+    Range("N10:O18").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    End If
+    
+    Range("A1").Select
+End Sub
+
+' Modu³ 7
+
+Function CzyDruzynaAktywna() As String
+    Sheets("Rozgrywka").Select
+    Probnik1 = Range("C14").Value
+    Probnik2 = Range("F14").Value
+    Probnik3 = Range("I14").Value
+    Probnik4 = Range("L14").Value
+    Probnik5 = Range("O14").Value
+
+    If Probnik1 <= 0 And Probnik2 <= 0 And Probnik3 <= 0 And Probnik4 <= 0 And Probnik5 <= 0 Then
+    CzyDruzynaAktywna = "Martwa"
+    End If
+    If Probnik1 <= 0 And Probnik2 <= 0 And Probnik3 <= 0 And Probnik4 <= 0 And Probnik5 <= 0 Then
+    GoTo LastLine7
+    End If
+    
+    If Probnik1 > 0 Or Probnik2 > 0 Or Probnik3 > 0 Or Probnik4 > 0 Or Probnik5 > 0 Then
+    CzyDruzynaAktywna = "Aktywna"
+    End If
+    
+LastLine7:
+End Function
+
+Function CzyWrogowieAktywni() As String
+    
+    ProbnikW1 = Range("C6").Value
+    ProbnikW2 = Range("F6").Value
+    ProbnikW3 = Range("I6").Value
+    ProbnikW4 = Range("L6").Value
+    ProbnikW5 = Range("O6").Value
+    If ProbnikW1 <= 0 And ProbnikW2 <= 0 And ProbnikW3 <= 0 And ProbnikW4 <= 0 And ProbnikW5 <= 0 Then
+    CzyWrogowieAktywni = "Martwi"
+    End If
+    If ProbnikW1 <= 0 And ProbnikW2 <= 0 And ProbnikW3 <= 0 And ProbnikW4 <= 0 And ProbnikW5 <= 0 Then
+    GoTo LastLine4
+    End If
+    
+    If ProbnikW1 > 0 Or ProbnikW2 > 0 Or ProbnikW3 > 0 Or ProbnikW4 > 0 Or ProbnikW5 > 0 Then
+    CzyWrogowieAktywni = "Aktywni"
+    End If
+    
+LastLine4:
+End Function
+
+' Modu³ 8
+
+Sub Wrog1(RasaWrog As String, StatusWrog As String, ZywotnoscWrog As Integer, ReakcjaWrog As Integer, AtakWrog As Integer, ObronaWrog As Integer)
+    Range("C4").Value = RasaWrog
+    Range("C5").Value = StatusWrog
+    Range("C6").Value = ZywotnoscWrog
+    Range("C7").Value = ReakcjaWrog
+    Range("C8").Value = AtakWrog
+    Range("C9").Value = ObronaWrog
+End Sub
+
+Sub Wrog2(RasaWrog As String, StatusWrog As String, ZywotnoscWrog As Integer, ReakcjaWrog As Integer, AtakWrog As Integer, ObronaWrog As Integer)
+    Range("F4").Value = RasaWrog
+    Range("F5").Value = StatusWrog
+    Range("F6").Value = ZywotnoscWrog
+    Range("F7").Value = ReakcjaWrog
+    Range("F8").Value = AtakWrog
+    Range("F9").Value = ObronaWrog
+End Sub
+
+Sub Wrog3(RasaWrog As String, StatusWrog As String, ZywotnoscWrog As Integer, ReakcjaWrog As Integer, AtakWrog As Integer, ObronaWrog As Integer)
+    Range("I4").Value = RasaWrog
+    Range("I5").Value = StatusWrog
+    Range("I6").Value = ZywotnoscWrog
+    Range("I7").Value = ReakcjaWrog
+    Range("I8").Value = AtakWrog
+    Range("I9").Value = ObronaWrog
+End Sub
+
+Sub Wrog4(RasaWrog As String, StatusWrog As String, ZywotnoscWrog As Integer, ReakcjaWrog As Integer, AtakWrog As Integer, ObronaWrog As Integer)
+    Range("L4").Value = RasaWrog
+    Range("L5").Value = StatusWrog
+    Range("L6").Value = ZywotnoscWrog
+    Range("L7").Value = ReakcjaWrog
+    Range("L8").Value = AtakWrog
+    Range("L9").Value = ObronaWrog
+End Sub
+
+Sub Wrog5(RasaWrog As String, StatusWrog As String, ZywotnoscWrog As Integer, ReakcjaWrog As Integer, AtakWrog As Integer, ObronaWrog As Integer)
+    Range("O4").Value = RasaWrog
+    Range("O5").Value = StatusWrog
+    Range("O6").Value = ZywotnoscWrog
+    Range("O7").Value = ReakcjaWrog
+    Range("O8").Value = AtakWrog
+    Range("O9").Value = ObronaWrog
+End Sub
+
+' Modu³ 9
+
+Sub Walka()
+    Sheets("Rozgrywka").Range("C16").Value = Sheets("Druzyna").Range("B9").Value
+    Sheets("Rozgrywka").Range("C17").Value = Sheets("Druzyna").Range("B10").Value
+    Sheets("Rozgrywka").Range("C18").Value = Sheets("Druzyna").Range("B11").Value
+    Sheets("Rozgrywka").Range("F16").Value = Sheets("Druzyna").Range("D9").Value
+    Sheets("Rozgrywka").Range("F17").Value = Sheets("Druzyna").Range("D10").Value
+    Sheets("Rozgrywka").Range("F18").Value = Sheets("Druzyna").Range("D11").Value
+    Sheets("Rozgrywka").Range("I16").Value = Sheets("Druzyna").Range("F9").Value
+    Sheets("Rozgrywka").Range("I17").Value = Sheets("Druzyna").Range("F10").Value
+    Sheets("Rozgrywka").Range("I18").Value = Sheets("Druzyna").Range("F11").Value
+    Sheets("Rozgrywka").Range("L16").Value = Sheets("Druzyna").Range("H9").Value
+    Sheets("Rozgrywka").Range("L17").Value = Sheets("Druzyna").Range("H10").Value
+    Sheets("Rozgrywka").Range("L18").Value = Sheets("Druzyna").Range("H11").Value
+    Sheets("Rozgrywka").Range("O16").Value = Sheets("Druzyna").Range("J9").Value
+    Sheets("Rozgrywka").Range("O17").Value = Sheets("Druzyna").Range("J10").Value
+    Sheets("Rozgrywka").Range("O18").Value = Sheets("Druzyna").Range("J11").Value
+    
+    Sheets("Rozgrywka").Range("C15").Value = Sheets("Druzyna").Range("B13").Value
+    Sheets("Rozgrywka").Range("F15").Value = Sheets("Druzyna").Range("D13").Value
+    Sheets("Rozgrywka").Range("I15").Value = Sheets("Druzyna").Range("F13").Value
+    Sheets("Rozgrywka").Range("L15").Value = Sheets("Druzyna").Range("H13").Value
+    Sheets("Rozgrywka").Range("O15").Value = Sheets("Druzyna").Range("J13").Value
+    
+    Sheets("Rozgrywka").Select
+    Dim Runda As Integer
+    Runda = 0
+    Dim Wrogowie As String
+    Wrogowie = CzyWrogowieAktywni
+    Druzyna = CzyDruzynaAktywna
+    Kolorowanie
+    Dim AtakowanyWrog As Integer
+    Dim AtakowanyGracz As Integer
+    Dim PunktyGracz1Temp As Integer
+    Dim PunktyGracz2Temp As Integer
+    Dim PunktyGracz3Temp As Integer
+    Dim PunktyGracz4Temp As Integer
+    Dim PunktyGracz5Temp As Integer
+    PunktyGracz1Temp = 0
+    PunktyGracz2Temp = 0
+    PunktyGracz3Temp = 0
+    PunktyGracz4Temp = 0
+    PunktyGracz5Temp = 0
+    Dim ZwyciestwaGraczTemp1 As Integer
+    Dim ZwyciestwaGraczTemp2 As Integer
+    Dim ZwyciestwaGraczTemp3 As Integer
+    Dim ZwyciestwaGraczTemp4 As Integer
+    Dim ZwyciestwaGraczTemp5 As Integer
+    ZwyciestwaGraczTemp1 = 0
+    ZwyciestwaGraczTemp2 = 0
+    ZwyciestwaGraczTemp3 = 0
+    ZwyciestwaGraczTemp4 = 0
+    ZwyciestwaGraczTemp5 = 0
+    
+    Dim ImieGracz1 As String
+    ImieGracz1 = Range("C11").Value
+    Dim ImieGracz2 As String
+    ImieGracz2 = Range("F11").Value
+    Dim ImieGracz3 As String
+    ImieGracz3 = Range("I11").Value
+    Dim ImieGracz4 As String
+    ImieGracz4 = Range("L11").Value
+    Dim ImieGracz5 As String
+    ImieGracz5 = Range("O11").Value
+    Dim ImieWrog1 As String
+    ImieWrog1 = Range("C4").Value
+    Dim ImieWrog2 As String
+    ImieWrog2 = Range("F4").Value
+    Dim ImieWrog3 As String
+    ImieWrog3 = Range("I4").Value
+    Dim ImieWrog4 As String
+    ImieWrog4 = Range("L4").Value
+    Dim ImieWrog5 As String
+    ImieWrog5 = Range("O4").Value
+    Dim ReakcjaGracz1 As Integer
+    Dim ReakcjaGracz2 As Integer
+    Dim ReakcjaGracz3 As Integer
+    Dim ReakcjaGracz4 As Integer
+    Dim ReakcjaGracz5 As Integer
+    Dim ReakcjaWrog1 As Integer
+    Dim ReakcjaWrog2 As Integer
+    Dim ReakcjaWrog3 As Integer
+    Dim ReakcjaWrog4 As Integer
+    Dim ReakcjaWrog5 As Integer
+    Dim ReakcjaGracz1Temp As Integer
+    Dim ReakcjaGracz2Temp As Integer
+    Dim ReakcjaGracz3Temp As Integer
+    Dim ReakcjaGracz4Temp As Integer
+    Dim ReakcjaGracz5Temp As Integer
+    Dim ReakcjaWrog1Temp As Integer
+    Dim ReakcjaWrog2Temp As Integer
+    Dim ReakcjaWrog3Temp As Integer
+    Dim ReakcjaWrog4Temp As Integer
+    Dim ReakcjaWrog5Temp As Integer
+    ReakcjaGracz1 = Range("C16").Value
+    ReakcjaGracz2 = Range("F16").Value
+    ReakcjaGracz3 = Range("I16").Value
+    ReakcjaGracz4 = Range("L16").Value
+    ReakcjaGracz5 = Range("O16").Value
+    ReakcjaWrog1 = Range("C7").Value
+    ReakcjaWrog2 = Range("F7").Value
+    ReakcjaWrog3 = Range("I7").Value
+    ReakcjaWrog4 = Range("C7").Value
+    ReakcjaWrog5 = Range("O7").Value
+    
+    Dim AtakGracz1 As Integer
+    Dim AtakGracz2 As Integer
+    Dim AtakGracz3 As Integer
+    Dim AtakGracz4 As Integer
+    Dim AtakGracz5 As Integer
+    Dim AtakWrog1 As Integer
+    Dim AtakWrog2 As Integer
+    Dim AtakWrog3 As Integer
+    Dim AtakWrog4 As Integer
+    Dim AtakWrog5 As Integer
+    Dim AtakGracz1Temp As Integer
+    Dim AtakGracz2Temp As Integer
+    Dim AtakGracz3Temp As Integer
+    Dim AtakGracz4Temp As Integer
+    Dim AtakGracz5Temp As Integer
+    Dim AtakWrog1Temp As Integer
+    Dim AtakWrog2Temp As Integer
+    Dim AtakWrog3Temp As Integer
+    Dim AtakWrog4Temp As Integer
+    Dim AtakWrog5Temp As Integer
+    AtakGracz1 = Range("C17").Value
+    AtakGracz2 = Range("F17").Value
+    AtakGracz3 = Range("I17").Value
+    AtakGracz4 = Range("L17").Value
+    AtakGracz5 = Range("O17").Value
+    AtakWrog1 = Range("C8").Value
+    AtakWrog2 = Range("F8").Value
+    AtakWrog3 = Range("I8").Value
+    AtakWrog4 = Range("C8").Value
+    AtakWrog5 = Range("O8").Value
+    
+    Dim ObronaGracz1 As Integer
+    Dim ObronaGracz2 As Integer
+    Dim ObronaGracz3 As Integer
+    Dim ObronaGracz4 As Integer
+    Dim ObronaGracz5 As Integer
+    Dim ObronaWrog1 As Integer
+    Dim ObronaWrog2 As Integer
+    Dim ObronaWrog3 As Integer
+    Dim ObronaWrog4 As Integer
+    Dim ObronaWrog5 As Integer
+    Dim ObronaGracz1Temp As Integer
+    Dim ObronaGracz2Temp As Integer
+    Dim ObronaGracz3Temp As Integer
+    Dim ObronaGracz4Temp As Integer
+    Dim ObronaGracz5Temp As Integer
+    Dim ObronaWrog1Temp As Integer
+    Dim ObronaWrog2Temp As Integer
+    Dim ObronaWrog3Temp As Integer
+    Dim ObronaWrog4Temp As Integer
+    Dim ObronaWrog5Temp As Integer
+    ObronaGracz1 = Range("C18").Value
+    ObronaGracz2 = Range("F18").Value
+    ObronaGracz3 = Range("I18").Value
+    ObronaGracz4 = Range("L18").Value
+    ObronaGracz5 = Range("O18").Value
+    ObronaWrog1 = Range("C9").Value
+    ObronaWrog2 = Range("F9").Value
+    ObronaWrog3 = Range("I9").Value
+    ObronaWrog4 = Range("C9").Value
+    ObronaWrog5 = Range("O9").Value
+    
+    Dim ZywotnoscGracz1 As Integer
+    Dim ZywotnoscGracz2 As Integer
+    Dim ZywotnoscGracz3 As Integer
+    Dim ZywotnoscGracz4 As Integer
+    Dim ZywotnoscGracz5 As Integer
+    Dim ZywotnoscWrog1 As Integer
+    Dim ZywotnoscWrog2 As Integer
+    Dim ZywotnoscWrog3 As Integer
+    Dim ZywotnoscWrog4 As Integer
+    Dim ZywotnoscWrog5 As Integer
+    ZywotnoscGracz1 = Range("C14").Value
+    ZywotnoscGracz2 = Range("F14").Value
+    ZywotnoscGracz3 = Range("I14").Value
+    ZywotnoscGracz4 = Range("L14").Value
+    ZywotnoscGracz5 = Range("O14").Value
+    ZywotnoscWrog1 = Range("C6").Value
+    ZywotnoscWrog2 = Range("F6").Value
+    ZywotnoscWrog3 = Range("I6").Value
+    ZywotnoscWrog4 = Range("L6").Value
+    ZywotnoscWrog5 = Range("O6").Value
+    
+    ' POCZATEK RUNDY WALKI
+    ' POCZATEK RUNDY WALKI
+    ' POCZATEK RUNDY WALKI
+    
+    While Wrogowie = "Aktywni" And Druzyna = "Aktywna"
+        Sheets("Rozgrywka").Select
+        Runda = Runda + 1
+        Wrogowie = CzyWrogowieAktywni
+        Druzyna = CzyDruzynaAktywna
+        If Wrogowie = "Aktywni" And Druzyna = "Aktywna" Then
+            MsgBox "Nastêpuje " & Runda & " runda walki"
+    
+            ' Na pocz¹tku ka¿dej rundy walki statystyki aktywnych postaci i wrogów ustalaj¹ siê na poziomie:
+            ' Cecha bazowa + K6
+            If ZywotnoscGracz1 > 0 Then ReakcjaGracz1Temp = ReakcjaGracz1 + Losuj(1, 7)
+            If ZywotnoscGracz2 > 0 Then ReakcjaGracz2Temp = ReakcjaGracz2 + Losuj(1, 7)
+            If ZywotnoscGracz3 > 0 Then ReakcjaGracz3Temp = ReakcjaGracz3 + Losuj(1, 7)
+            If ZywotnoscGracz4 > 0 Then ReakcjaGracz4Temp = ReakcjaGracz4 + Losuj(1, 7)
+            If ZywotnoscGracz5 > 0 Then ReakcjaGracz5Temp = ReakcjaGracz5 + Losuj(1, 7)
+            If ZywotnoscWrog1 > 0 Then ReakcjaWrog1Temp = ReakcjaWrog1 + Losuj(1, 7)
+            If ZywotnoscWrog2 > 0 Then ReakcjaWrog2Temp = ReakcjaWrog2 + Losuj(1, 7)
+            If ZywotnoscWrog3 > 0 Then ReakcjaWrog3Temp = ReakcjaWrog3 + Losuj(1, 7)
+            If ZywotnoscWrog4 > 0 Then ReakcjaWrog4Temp = ReakcjaWrog4 + Losuj(1, 7)
+            If ZywotnoscWrog5 > 0 Then ReakcjaWrog5Temp = ReakcjaWrog5 + Losuj(1, 7)
+            If ZywotnoscGracz1 > 0 Then AtakGracz1Temp = AtakGracz1 + Losuj(1, 7)
+            If ZywotnoscGracz2 > 0 Then AtakGracz2Temp = AtakGracz2 + Losuj(1, 7)
+            If ZywotnoscGracz3 > 0 Then AtakGracz3Temp = AtakGracz3 + Losuj(1, 7)
+            If ZywotnoscGracz4 > 0 Then AtakGracz4Temp = AtakGracz4 + Losuj(1, 7)
+            If ZywotnoscGracz5 > 0 Then AtakGracz5Temp = AtakGracz5 + Losuj(1, 7)
+            If ZywotnoscWrog1 > 0 Then AtakWrog1Temp = AtakWrog1 + Losuj(1, 7)
+            If ZywotnoscWrog2 > 0 Then AtakWrog2Temp = AtakWrog2 + Losuj(1, 7)
+            If ZywotnoscWrog3 > 0 Then AtakWrog3Temp = AtakWrog3 + Losuj(1, 7)
+            If ZywotnoscWrog4 > 0 Then AtakWrog4Temp = AtakWrog4 + Losuj(1, 7)
+            If ZywotnoscWrog5 > 0 Then AtakWrog5Temp = AtakWrog5 + Losuj(1, 7)
+            If ZywotnoscGracz1 > 0 Then ObronaGracz1Temp = ObronaGracz1 + Losuj(1, 7)
+            If ZywotnoscGracz2 > 0 Then ObronaGracz2Temp = ObronaGracz2 + Losuj(1, 7)
+            If ZywotnoscGracz3 > 0 Then ObronaGracz3Temp = ObronaGracz3 + Losuj(1, 7)
+            If ZywotnoscGracz4 > 0 Then ObronaGracz4Temp = ObronaGracz4 + Losuj(1, 7)
+            If ZywotnoscGracz5 > 0 Then ObronaGracz5Temp = ObronaGracz5 + Losuj(1, 7)
+            If ZywotnoscWrog1 > 0 Then ObronaWrog1Temp = ObronaWrog1 + Losuj(1, 7)
+            If ZywotnoscWrog2 > 0 Then ObronaWrog2Temp = ObronaWrog2 + Losuj(1, 7)
+            If ZywotnoscWrog3 > 0 Then ObronaWrog3Temp = ObronaWrog3 + Losuj(1, 7)
+            If ZywotnoscWrog4 > 0 Then ObronaWrog4Temp = ObronaWrog4 + Losuj(1, 7)
+            If ZywotnoscWrog5 > 0 Then ObronaWrog5Temp = ObronaWrog5 + Losuj(1, 7)
+            ' Obrazujemy to na kartach postaci
+            Range("C16").Value = ReakcjaGracz1Temp
+            Range("F16").Value = ReakcjaGracz2Temp
+            Range("I16").Value = ReakcjaGracz3Temp
+            Range("L16").Value = ReakcjaGracz4Temp
+            Range("O16").Value = ReakcjaGracz5Temp
+            Range("C7").Value = ReakcjaWrog1Temp
+            Range("F7").Value = ReakcjaWrog2Temp
+            Range("I7").Value = ReakcjaWrog3Temp
+            Range("L7").Value = ReakcjaWrog4Temp
+            Range("O7").Value = ReakcjaWrog5Temp
+            Range("C17").Value = AtakGracz1Temp
+            Range("F17").Value = AtakGracz2Temp
+            Range("I17").Value = AtakGracz3Temp
+            Range("L17").Value = AtakGracz4Temp
+            Range("O17").Value = AtakGracz5Temp
+            Range("C8").Value = AtakWrog1Temp
+            Range("F8").Value = AtakWrog2Temp
+            Range("I8").Value = AtakWrog3Temp
+            Range("L8").Value = AtakWrog4Temp
+            Range("O8").Value = AtakWrog5Temp
+            Range("C18").Value = ObronaGracz1Temp
+            Range("F18").Value = ObronaGracz2Temp
+            Range("I18").Value = ObronaGracz3Temp
+            Range("L18").Value = ObronaGracz4Temp
+            Range("O18").Value = ObronaGracz5Temp
+            Range("C9").Value = ObronaWrog1Temp
+            Range("F9").Value = ObronaWrog2Temp
+            Range("I9").Value = ObronaWrog3Temp
+            Range("L9").Value = ObronaWrog4Temp
+            Range("O9").Value = ObronaWrog5Temp
+    
+            ' TERAZ RZECZYWISTY BLOK WALKI
+    
+            MsgBox "Trwa " & Runda & " runda walki"
+    
+            ' Sprawdzanie reakcji
+            While ReakcjaGracz1Temp > 0 Or ReakcjaGracz2Temp > 0 Or ReakcjaGracz3Temp > 0 _
+            Or ReakcjaGracz4Temp > 0 Or ReakcjaGracz5Temp > 0 Or ReakcjaWrog1Temp > 0 _
+            Or ReakcjaWrog2Temp > 0 Or ReakcjaWrog3Temp > 0 Or ReakcjaWrog4Temp > 0 _
+            Or ReakcjaWrog5Temp > 0
+            ' Atak 1 gracza
+                If ZywotnoscGracz1 > 0 _
+                And ReakcjaGracz1Temp >= ReakcjaGracz2Temp _
+                And ReakcjaGracz1Temp >= ReakcjaGracz3Temp _
+                And ReakcjaGracz1Temp >= ReakcjaGracz4Temp _
+                And ReakcjaGracz1Temp >= ReakcjaGracz5Temp _
+                And ReakcjaGracz1Temp >= ReakcjaWrog1Temp _
+                And ReakcjaGracz1Temp >= ReakcjaWrog2Temp _
+                And ReakcjaGracz1Temp >= ReakcjaWrog3Temp _
+                And ReakcjaGracz1Temp >= ReakcjaWrog4Temp _
+                And ReakcjaGracz1Temp >= ReakcjaWrog5Temp Then
+                    MsgBox ImieGracz1 & " atakuje"
+                    CelWrog = AtakGracza
+                
+                    If CelWrog = 1 Then
+                        ZywotnoscWrog1 = ZywotnoscWrog1 - ObrazeniaZadanePrzezGracza(ImieGracz1, ImieWrog1, AtakGracz1Temp, ObronaWrog1Temp)
+                        Range("C6").Value = ZywotnoscWrog1
+                        If ZywotnoscWrog1 <= 0 Then
+                            MsgBox ImieGracz1 & " zabija " & ImieWrog1 & "!"
+                            ZwyciestwaGracz1Temp = ZwyciestwaGracz1Temp + 1
+                            PunktyGracz1Temp = PunktyGracz1Temp + ReakcjaWrog1 + AtakWrog1 + ObronaWrog1
+                            CzyscWrog1
+                            ReakcjaWrog1Temp = 0
+                            AtakWrog1Temp = 0
+                            ObronaWrog1Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 2 Then
+                        ZywotnoscWrog2 = ZywotnoscWrog2 - ObrazeniaZadanePrzezGracza(ImieGracz1, ImieWrog2, AtakGracz1Temp, ObronaWrog2Temp)
+                        Range("F6").Value = ZywotnoscWrog2
+                        If ZywotnoscWrog2 <= 0 Then
+                            MsgBox ImieGracz1 & " zabija " & ImieWrog2 & "!"
+                            ZwyciestwaGracz1Temp = ZwyciestwaGracz1Temp + 1
+                            PunktyGracz1Temp = PunktyGracz1Temp + ReakcjaWrog2 + AtakWrog2 + ObronaWrog2
+                            CzyscWrog2
+                            ReakcjaWrog2Temp = 0
+                            AtakWrog2Temp = 0
+                            ObronaWrog2Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                   
+                    If CelWrog = 3 Then
+                        ZywotnoscWrog3 = ZywotnoscWrog3 - ObrazeniaZadanePrzezGracza(ImieGracz1, ImieWrog3, AtakGracz1Temp, ObronaWrog3Temp)
+                        Range("I6").Value = ZywotnoscWrog3
+                        If ZywotnoscWrog3 <= 0 Then
+                            MsgBox ImieGracz1 & " zabija " & ImieWrog3 & "!"
+                            ZwyciestwaGracz1Temp = ZwyciestwaGracz1Temp + 1
+                            PunktyGracz1Temp = PunktyGracz1Temp + ReakcjaWrog3 + AtakWrog3 + ObronaWrog3
+                            CzyscWrog3
+                            ReakcjaWrog3Temp = 0
+                            AtakWrog3Temp = 0
+                            ObronaWrog3Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 4 Then
+                        ZywotnoscWrog4 = ZywotnoscWrog4 - ObrazeniaZadanePrzezGracza(ImieGracz1, ImieWrog4, AtakGracz1Temp, ObronaWrog4Temp)
+                        Range("L6").Value = ZywotnoscWrog4
+                        If ZywotnoscWrog4 <= 0 Then
+                            MsgBox ImieGracz1 & " zabija " & ImieWrog4 & "!"
+                            ZwyciestwaGracz1Temp = ZwyciestwaGracz1Temp + 1
+                            PunktyGracz1Temp = PunktyGracz1Temp + ReakcjaWrog4 + AtakWrog4 + ObronaWrog4
+                            CzyscWrog4
+                            ReakcjaWrog4Temp = 0
+                            AtakWrog4Temp = 0
+                            ObronaWrog4Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 5 Then
+                        ZywotnoscWrog5 = ZywotnoscWrog5 - ObrazeniaZadanePrzezGracza(ImieGracz1, ImieWrog5, AtakGracz1Temp, ObronaWrog5Temp)
+                        Range("O6").Value = ZywotnoscWrog5
+                        If ZywotnoscWrog5 <= 0 Then
+                            MsgBox ImieGracz1 & " zabija " & ImieWrog5 & "!"
+                            ZwyciestwaGracz1Temp = ZwyciestwaGracz1Temp + 1
+                            PunktyGracz1Temp = PunktyGracz1Temp + ReakcjaWrog5 + AtakWrog5 + ObronaWrog5
+                            CzyscWrog5
+                            ReakcjaWrog5Temp = 0
+                            AtakWrog5Temp = 0
+                            ObronaWrog5Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    ReakcjaGracz1Temp = ReakcjaGracz1Temp - 10
+                    Range("C16").Value = ReakcjaGracz1Temp
+                End If
+    ' Atak 2 gracza
+                If ZywotnoscGracz2 > 0 _
+                And ReakcjaGracz2Temp >= ReakcjaGracz1Temp _
+                And ReakcjaGracz2Temp >= ReakcjaGracz3Temp _
+                And ReakcjaGracz2Temp >= ReakcjaGracz4Temp _
+                And ReakcjaGracz2Temp >= ReakcjaGracz5Temp _
+                And ReakcjaGracz2Temp >= ReakcjaWrog1Temp _
+                And ReakcjaGracz2Temp >= ReakcjaWrog2Temp _
+                And ReakcjaGracz2Temp >= ReakcjaWrog3Temp _
+                And ReakcjaGracz2Temp >= ReakcjaWrog4Temp _
+                And ReakcjaGracz2Temp >= ReakcjaWrog5Temp Then
+                    MsgBox ImieGracz2 & " atakuje"
+                    CelWrog = AtakGracza
+                
+                    If CelWrog = 1 Then
+                        ZywotnoscWrog1 = ZywotnoscWrog1 - ObrazeniaZadanePrzezGracza(ImieGracz2, ImieWrog1, AtakGracz2Temp, ObronaWrog1Temp)
+                        Range("C6").Value = ZywotnoscWrog1
+                        If ZywotnoscWrog1 <= 0 Then
+                            MsgBox ImieGracz2 & " zabija " & ImieWrog1 & "!"
+                            ZwyciestwaGracz2Temp = ZwyciestwaGracz2Temp + 1
+                            PunktyGracz2Temp = PunktyGracz2Temp + ReakcjaWrog1 + AtakWrog1 + ObronaWrog1
+                            CzyscWrog1
+                            ReakcjaWrog1Temp = 0
+                            AtakWrog1Temp = 0
+                            ObronaWrog1Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 2 Then
+                        ZywotnoscWrog2 = ZywotnoscWrog2 - ObrazeniaZadanePrzezGracza(ImieGracz2, ImieWrog2, AtakGracz2Temp, ObronaWrog2Temp)
+                        Range("F6").Value = ZywotnoscWrog2
+                        If ZywotnoscWrog2 <= 0 Then
+                            MsgBox ImieGracz2 & " zabija " & ImieWrog2 & "!"
+                            ZwyciestwaGracz2Temp = ZwyciestwaGracz2Temp + 1
+                            PunktyGracz2Temp = PunktyGracz2Temp + ReakcjaWrog2 + AtakWrog2 + ObronaWrog2
+                            CzyscWrog2
+                            ReakcjaWrog2Temp = 0
+                            AtakWrog2Temp = 0
+                            ObronaWrog2Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                   
+                    If CelWrog = 3 Then
+                        ZywotnoscWrog3 = ZywotnoscWrog3 - ObrazeniaZadanePrzezGracza(ImieGracz2, ImieWrog3, AtakGracz2Temp, ObronaWrog3Temp)
+                        Range("I6").Value = ZywotnoscWrog3
+                        If ZywotnoscWrog3 <= 0 Then
+                            MsgBox ImieGracz2 & " zabija " & ImieWrog3 & "!"
+                            ZwyciestwaGracz2Temp = ZwyciestwaGracz2Temp + 1
+                            PunktyGracz2Temp = PunktyGracz2Temp + ReakcjaWrog3 + AtakWrog3 + ObronaWrog3
+                            CzyscWrog3
+                            ReakcjaWrog3Temp = 0
+                            AtakWrog3Temp = 0
+                            ObronaWrog3Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 4 Then
+                        ZywotnoscWrog4 = ZywotnoscWrog4 - ObrazeniaZadanePrzezGracza(ImieGracz2, ImieWrog4, AtakGracz2Temp, ObronaWrog4Temp)
+                        Range("L6").Value = ZywotnoscWrog4
+                        If ZywotnoscWrog4 <= 0 Then
+                            MsgBox ImieGracz2 & " zabija " & ImieWrog4 & "!"
+                            ZwyciestwaGracz2Temp = ZwyciestwaGracz2Temp + 1
+                            PunktyGracz2Temp = PunktyGracz2Temp + ReakcjaWrog4 + AtakWrog4 + ObronaWrog4
+                            CzyscWrog4
+                            ReakcjaWrog4Temp = 0
+                            AtakWrog4Temp = 0
+                            ObronaWrog4Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 5 Then
+                        ZywotnoscWrog5 = ZywotnoscWrog5 - ObrazeniaZadanePrzezGracza(ImieGracz2, ImieWrog5, AtakGracz2Temp, ObronaWrog5Temp)
+                        Range("O6").Value = ZywotnoscWrog5
+                        If ZywotnoscWrog5 <= 0 Then
+                            MsgBox ImieGracz2 & " zabija " & ImieWrog5 & "!"
+                            ZwyciestwaGracz2Temp = ZwyciestwaGracz2Temp + 1
+                            PunktyGracz2Temp = PunktyGracz2Temp + ReakcjaWrog5 + AtakWrog5 + ObronaWrog5
+                            CzyscWrog5
+                            ReakcjaWrog5Temp = 0
+                            AtakWrog5Temp = 0
+                            ObronaWrog5Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                
+                    ReakcjaGracz2Temp = ReakcjaGracz2Temp - 10
+                    Range("F16").Value = ReakcjaGracz2Temp
+                End If
+    ' Atak 3 gracza
+                If ZywotnoscGracz3 > 0 _
+                And ReakcjaGracz3Temp >= ReakcjaGracz1Temp _
+                And ReakcjaGracz3Temp >= ReakcjaGracz2Temp _
+                And ReakcjaGracz3Temp >= ReakcjaGracz4Temp _
+                And ReakcjaGracz3Temp >= ReakcjaGracz5Temp _
+                And ReakcjaGracz3Temp >= ReakcjaWrog1Temp _
+                And ReakcjaGracz3Temp >= ReakcjaWrog2Temp _
+                And ReakcjaGracz3Temp >= ReakcjaWrog3Temp _
+                And ReakcjaGracz3Temp >= ReakcjaWrog4Temp _
+                And ReakcjaGracz3Temp >= ReakcjaWrog5Temp Then
+                    MsgBox ImieGracz3 & " atakuje"
+                    CelWrog = AtakGracza
+                
+                    If CelWrog = 1 Then
+                        ZywotnoscWrog1 = ZywotnoscWrog1 - ObrazeniaZadanePrzezGracza(ImieGracz3, ImieWrog1, AtakGracz3Temp, ObronaWrog1Temp)
+                        Range("C6").Value = ZywotnoscWrog1
+                        If ZywotnoscWrog1 <= 0 Then
+                            MsgBox ImieGracz3 & " zabija " & ImieWrog1 & "!"
+                            ZwyciestwaGracz3Temp = ZwyciestwaGracz3Temp + 1
+                            PunktyGracz3Temp = PunktyGracz3Temp + ReakcjaWrog1 + AtakWrog1 + ObronaWrog1
+                            CzyscWrog1
+                            ReakcjaWrog1Temp = 0
+                            AtakWrog1Temp = 0
+                            ObronaWrog1Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 2 Then
+                        ZywotnoscWrog2 = ZywotnoscWrog2 - ObrazeniaZadanePrzezGracza(ImieGracz3, ImieWrog2, AtakGracz3Temp, ObronaWrog2Temp)
+                        Range("F6").Value = ZywotnoscWrog2
+                        If ZywotnoscWrog2 <= 0 Then
+                            MsgBox ImieGracz3 & " zabija " & ImieWrog2 & "!"
+                            ZwyciestwaGracz3Temp = ZwyciestwaGracz3Temp + 1
+                            PunktyGracz3Temp = PunktyGracz3Temp + ReakcjaWrog2 + AtakWrog2 + ObronaWrog2
+                            CzyscWrog2
+                            ReakcjaWrog2Temp = 0
+                            AtakWrog2Temp = 0
+                            ObronaWrog2Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                   
+                    If CelWrog = 3 Then
+                        ZywotnoscWrog3 = ZywotnoscWrog3 - ObrazeniaZadanePrzezGracza(ImieGracz3, ImieWrog3, AtakGracz3Temp, ObronaWrog3Temp)
+                        Range("I6").Value = ZywotnoscWrog3
+                        If ZywotnoscWrog3 <= 0 Then
+                            MsgBox ImieGracz3 & " zabija " & ImieWrog3 & "!"
+                            ZwyciestwaGracz3Temp = ZwyciestwaGracz3Temp + 1
+                            PunktyGracz3Temp = PunktyGracz3Temp + ReakcjaWrog3 + AtakWrog3 + ObronaWrog3
+                            CzyscWrog3
+                            ReakcjaWrog3Temp = 0
+                            AtakWrog3Temp = 0
+                            ObronaWrog3Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 4 Then
+                        ZywotnoscWrog4 = ZywotnoscWrog4 - ObrazeniaZadanePrzezGracza(ImieGracz3, ImieWrog4, AtakGracz3Temp, ObronaWrog4Temp)
+                        Range("L6").Value = ZywotnoscWrog4
+                        If ZywotnoscWrog4 <= 0 Then
+                            MsgBox ImieGracz3 & " zabija " & ImieWrog4 & "!"
+                            ZwyciestwaGracz3Temp = ZwyciestwaGracz3Temp + 1
+                            PunktyGracz3Temp = PunktyGracz3Temp + ReakcjaWrog4 + AtakWrog4 + ObronaWrog4
+                            CzyscWrog4
+                            ReakcjaWrog4Temp = 0
+                            AtakWrog4Temp = 0
+                            ObronaWrog4Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 5 Then
+                        ZywotnoscWrog5 = ZywotnoscWrog5 - ObrazeniaZadanePrzezGracza(ImieGracz3, ImieWrog5, AtakGracz3Temp, ObronaWrog5Temp)
+                        Range("O6").Value = ZywotnoscWrog5
+                        If ZywotnoscWrog5 <= 0 Then
+                            MsgBox ImieGracz3 & " zabija " & ImieWrog5 & "!"
+                            ZwyciestwaGracz3Temp = ZwyciestwaGracz3Temp + 1
+                            PunktyGracz3Temp = PunktyGracz3Temp + ReakcjaWrog5 + AtakWrog5 + ObronaWrog5
+                            CzyscWrog5
+                            ReakcjaWrog5Temp = 0
+                            AtakWrog5Temp = 0
+                            ObronaWrog5Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                
+                    ReakcjaGracz3Temp = ReakcjaGracz3Temp - 10
+                    Range("I16").Value = ReakcjaGracz3Temp
+                End If
+    ' Atak 4 gracza
+                If ZywotnoscGracz4 > 0 _
+                And ReakcjaGracz4Temp >= ReakcjaGracz1Temp _
+                And ReakcjaGracz4Temp >= ReakcjaGracz2Temp _
+                And ReakcjaGracz4Temp >= ReakcjaGracz3Temp _
+                And ReakcjaGracz4Temp >= ReakcjaGracz5Temp _
+                And ReakcjaGracz4Temp >= ReakcjaWrog1Temp _
+                And ReakcjaGracz4Temp >= ReakcjaWrog2Temp _
+                And ReakcjaGracz4Temp >= ReakcjaWrog3Temp _
+                And ReakcjaGracz4Temp >= ReakcjaWrog4Temp _
+                And ReakcjaGracz4Temp >= ReakcjaWrog5Temp Then
+                    MsgBox ImieGracz4 & " atakuje"
+                    CelWrog = AtakGracza
+                
+                    If CelWrog = 1 Then
+                        ZywotnoscWrog1 = ZywotnoscWrog1 - ObrazeniaZadanePrzezGracza(ImieGracz4, ImieWrog1, AtakGracz4Temp, ObronaWrog1Temp)
+                        Range("C6").Value = ZywotnoscWrog1
+                        If ZywotnoscWrog1 <= 0 Then
+                            MsgBox ImieGracz4 & " zabija " & ImieWrog1 & "!"
+                            ZwyciestwaGracz4Temp = ZwyciestwaGracz4Temp + 1
+                            PunktyGracz4Temp = PunktyGracz4Temp + ReakcjaWrog1 + AtakWrog1 + ObronaWrog1
+                            CzyscWrog1
+                            ReakcjaWrog1Temp = 0
+                            AtakWrog1Temp = 0
+                            ObronaWrog1Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 2 Then
+                        ZywotnoscWrog2 = ZywotnoscWrog2 - ObrazeniaZadanePrzezGracza(ImieGracz4, ImieWrog2, AtakGracz4Temp, ObronaWrog2Temp)
+                        Range("F6").Value = ZywotnoscWrog2
+                        If ZywotnoscWrog2 <= 0 Then
+                            MsgBox ImieGracz4 & " zabija " & ImieWrog2 & "!"
+                            ZwyciestwaGracz4Temp = ZwyciestwaGracz4Temp + 1
+                            PunktyGracz4Temp = PunktyGracz4Temp + ReakcjaWrog2 + AtakWrog2 + ObronaWrog2
+                            CzyscWrog2
+                            ReakcjaWrog2Temp = 0
+                            AtakWrog2Temp = 0
+                            ObronaWrog2Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                   
+                    If CelWrog = 3 Then
+                        ZywotnoscWrog3 = ZywotnoscWrog3 - ObrazeniaZadanePrzezGracza(ImieGracz4, ImieWrog3, AtakGracz4Temp, ObronaWrog3Temp)
+                        Range("I6").Value = ZywotnoscWrog3
+                        If ZywotnoscWrog3 <= 0 Then
+                            MsgBox ImieGracz4 & " zabija " & ImieWrog3 & "!"
+                            ZwyciestwaGracz4Temp = ZwyciestwaGracz4Temp + 1
+                            PunktyGracz4Temp = PunktyGracz4Temp + ReakcjaWrog3 + AtakWrog3 + ObronaWrog3
+                            CzyscWrog3
+                            ReakcjaWrog3Temp = 0
+                            AtakWrog3Temp = 0
+                            ObronaWrog3Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 4 Then
+                        ZywotnoscWrog4 = ZywotnoscWrog4 - ObrazeniaZadanePrzezGracza(ImieGracz4, ImieWrog4, AtakGracz4Temp, ObronaWrog4Temp)
+                        Range("L6").Value = ZywotnoscWrog4
+                        If ZywotnoscWrog4 <= 0 Then
+                            MsgBox ImieGracz4 & " zabija " & ImieWrog4 & "!"
+                            ZwyciestwaGracz4Temp = ZwyciestwaGracz4Temp + 1
+                            PunktyGracz4Temp = PunktyGracz4Temp + ReakcjaWrog4 + AtakWrog4 + ObronaWrog4
+                            CzyscWrog4
+                            ReakcjaWrog4Temp = 0
+                            AtakWrog4Temp = 0
+                            ObronaWrog4Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 5 Then
+                        ZywotnoscWrog5 = ZywotnoscWrog5 - ObrazeniaZadanePrzezGracza(ImieGracz4, ImieWrog5, AtakGracz4Temp, ObronaWrog5Temp)
+                        Range("O6").Value = ZywotnoscWrog5
+                        If ZywotnoscWrog5 <= 0 Then
+                            MsgBox ImieGracz4 & " zabija " & ImieWrog5 & "!"
+                            ZwyciestwaGracz4Temp = ZwyciestwaGracz4Temp + 1
+                            PunktyGracz4Temp = PunktyGracz4Temp + ReakcjaWrog5 + AtakWrog5 + ObronaWrog5
+                            CzyscWrog5
+                            ReakcjaWrog5Temp = 0
+                            AtakWrog5Temp = 0
+                            ObronaWrog5Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                
+                    ReakcjaGracz4Temp = ReakcjaGracz4Temp - 10
+                    Range("L16").Value = ReakcjaGracz4Temp
+                End If
+    ' Atak 5 gracza
+                If ZywotnoscGracz5 > 0 _
+                And ReakcjaGracz5Temp >= ReakcjaGracz1Temp _
+                And ReakcjaGracz5Temp >= ReakcjaGracz2Temp _
+                And ReakcjaGracz5Temp >= ReakcjaGracz3Temp _
+                And ReakcjaGracz5Temp >= ReakcjaGracz4Temp _
+                And ReakcjaGracz5Temp >= ReakcjaWrog1Temp _
+                And ReakcjaGracz5Temp >= ReakcjaWrog2Temp _
+                And ReakcjaGracz5Temp >= ReakcjaWrog3Temp _
+                And ReakcjaGracz5Temp >= ReakcjaWrog4Temp _
+                And ReakcjaGracz5Temp >= ReakcjaWrog5Temp Then
+                    MsgBox ImieGracz5 & " atakuje"
+                    CelWrog = AtakGracza
+                
+                    If CelWrog = 1 Then
+                        ZywotnoscWrog1 = ZywotnoscWrog1 - ObrazeniaZadanePrzezGracza(ImieGracz5, ImieWrog1, AtakGracz5Temp, ObronaWrog1Temp)
+                        Range("C6").Value = ZywotnoscWrog1
+                        If ZywotnoscWrog1 <= 0 Then
+                            MsgBox ImieGracz5 & " zabija " & ImieWrog1 & "!"
+                            ZwyciestwaGracz5Temp = ZwyciestwaGracz5Temp + 1
+                            PunktyGracz5Temp = PunktyGracz5Temp + ReakcjaWrog1 + AtakWrog1 + ObronaWrog1
+                            CzyscWrog1
+                            ReakcjaWrog1Temp = 0
+                            AtakWrog1Temp = 0
+                            ObronaWrog1Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 2 Then
+                        ZywotnoscWrog2 = ZywotnoscWrog2 - ObrazeniaZadanePrzezGracza(ImieGracz5, ImieWrog2, AtakGracz5Temp, ObronaWrog2Temp)
+                        Range("F6").Value = ZywotnoscWrog2
+                        If ZywotnoscWrog2 <= 0 Then
+                            MsgBox ImieGracz5 & " zabija " & ImieWrog2 & "!"
+                            ZwyciestwaGracz5Temp = ZwyciestwaGracz5Temp + 1
+                            PunktyGracz5Temp = PunktyGracz5Temp + ReakcjaWrog2 + AtakWrog2 + ObronaWrog2
+                            CzyscWrog2
+                            ReakcjaWrog2Temp = 0
+                            AtakWrog2Temp = 0
+                            ObronaWrog2Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                   
+                    If CelWrog = 3 Then
+                        ZywotnoscWrog3 = ZywotnoscWrog3 - ObrazeniaZadanePrzezGracza(ImieGracz5, ImieWrog3, AtakGracz5Temp, ObronaWrog3Temp)
+                        Range("I6").Value = ZywotnoscWrog3
+                        If ZywotnoscWrog3 <= 0 Then
+                            MsgBox ImieGracz5 & " zabija " & ImieWrog3 & "!"
+                            ZwyciestwaGracz5Temp = ZwyciestwaGracz5Temp + 1
+                            PunktyGracz5Temp = PunktyGracz5Temp + ReakcjaWrog3 + AtakWrog3 + ObronaWrog3
+                            CzyscWrog3
+                            ReakcjaWrog3Temp = 0
+                            AtakWrog3Temp = 0
+                            ObronaWrog3Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 4 Then
+                        ZywotnoscWrog4 = ZywotnoscWrog4 - ObrazeniaZadanePrzezGracza(ImieGracz5, ImieWrog4, AtakGracz5Temp, ObronaWrog4Temp)
+                        Range("L6").Value = ZywotnoscWrog4
+                        If ZywotnoscWrog4 <= 0 Then
+                            MsgBox ImieGracz5 & " zabija " & ImieWrog4 & "!"
+                            ZwyciestwaGracz5Temp = ZwyciestwaGracz5Temp + 1
+                            PunktyGracz5Temp = PunktyGracz5Temp + ReakcjaWrog4 + AtakWrog4 + ObronaWrog4
+                            CzyscWrog4
+                            ReakcjaWrog4Temp = 0
+                            AtakWrog4Temp = 0
+                            ObronaWrog4Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                    
+                    If CelWrog = 5 Then
+                        ZywotnoscWrog5 = ZywotnoscWrog5 - ObrazeniaZadanePrzezGracza(ImieGracz5, ImieWrog5, AtakGracz5Temp, ObronaWrog5Temp)
+                        Range("O6").Value = ZywotnoscWrog5
+                        If ZywotnoscWrog5 <= 0 Then
+                            MsgBox ImieGracz5 & " zabija " & ImieWrog5 & "!"
+                            ZwyciestwaGracz5Temp = ZwyciestwaGracz5Temp + 1
+                            PunktyGracz5Temp = PunktyGracz5Temp + ReakcjaWrog5 + AtakWrog5 + ObronaWrog5
+                            CzyscWrog5
+                            ReakcjaWrog5Temp = 0
+                            AtakWrog5Temp = 0
+                            ObronaWrog5Temp = 0
+                        End If
+                        If CzyWrogowieAktywni = "Martwi" Then GoTo KoniecWalki
+                    End If
+                
+                    ReakcjaGracz5Temp = ReakcjaGracz5Temp - 10
+                    Range("O16").Value = ReakcjaGracz5Temp
+                End If
+    ' Atak 1 wroga
+                If ZywotnoscWrog1 > 0 _
+                And ReakcjaWrog1Temp >= ReakcjaGracz1Temp _
+                And ReakcjaWrog1Temp >= ReakcjaGracz2Temp _
+                And ReakcjaWrog1Temp >= ReakcjaGracz3Temp _
+                And ReakcjaWrog1Temp >= ReakcjaGracz4Temp _
+                And ReakcjaWrog1Temp >= ReakcjaGracz5Temp _
+                And ReakcjaWrog1Temp >= ReakcjaWrog2Temp _
+                And ReakcjaWrog1Temp >= ReakcjaWrog3Temp _
+                And ReakcjaWrog1Temp >= ReakcjaWrog4Temp _
+                And ReakcjaWrog1Temp >= ReakcjaWrog5Temp Then
+                    AtakowanyGracz = AtakWroga
+                    If AtakowanyGracz = 1 Then
+                        MsgBox "Wróg 1: " & ImieWrog1 & " atakuje " & ImieGracz1
+                        ' Wrog 1 atakuje gracza nr 1
+                        ZywotnoscGracz1 = ZywotnoscGracz1 - ObrazeniaZadanePrzezWroga(ImieWrog1, ImieGracz1, AtakWrog1Temp, ObronaGracz1Temp)
+                        Range("C14").Value = ZywotnoscGracz1
+                        If ZywotnoscGracz1 <= 0 Then
+                            MsgBox ImieWrog1 & " zabija " & ImieGracz1 & "!"
+                            CzyscGracz1
+                            ReakcjaGracz1Temp = 0
+                            AtakGracz1Temp = 0
+                            ObronaGracz1Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 2 Then
+                        MsgBox "Wróg 1: " & ImieWrog1 & " atakuje " & ImieGracz2
+                        ' Wrog 1 atakuje gracza nr 2
+                        ZywotnoscGracz2 = ZywotnoscGracz2 - ObrazeniaZadanePrzezWroga(ImieWrog1, ImieGracz2, AtakWrog1Temp, ObronaGracz2Temp)
+                        Range("F14").Value = ZywotnoscGracz2
+                            If ZywotnoscGracz2 <= 0 Then
+                            MsgBox ImieWrog1 & " zabija " & ImieGracz2 & "!"
+                            CzyscGracz2
+                            ReakcjaGracz2Temp = 0
+                            AtakGracz2Temp = 0
+                            ObronaGracz2Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 3 Then
+                        MsgBox "Wróg 1: " & ImieWrog1 & " atakuje " & ImieGracz3
+                        ' Wrog 1 atakuje gracza nr 3
+                        ZywotnoscGracz3 = ZywotnoscGracz3 - ObrazeniaZadanePrzezWroga(ImieWrog1, ImieGracz3, AtakWrog1Temp, ObronaGracz3Temp)
+                        Range("I14").Value = ZywotnoscGracz3
+                        If ZywotnoscGracz3 <= 0 Then
+                            MsgBox ImieWrog1 & " zabija " & ImieGracz3 & "!"
+                            CzyscGracz3
+                            ReakcjaGracz3Temp = 0
+                            AtakGracz3Temp = 0
+                            ObronaGracz3Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 4 Then
+                        MsgBox "Wróg 1: " & ImieWrog1 & " atakuje " & ImieGracz4
+                        ' Wrog 1 atakuje gracza nr 4
+                        ZywotnoscGracz4 = ZywotnoscGracz4 - ObrazeniaZadanePrzezWroga(ImieWrog1, ImieGracz4, AtakWrog1Temp, ObronaGracz4Temp)
+                        Range("L14").Value = ZywotnoscGracz4
+                        If ZywotnoscGracz4 <= 0 Then
+                            MsgBox ImieWrog1 & " zabija " & ImieGracz4 & "!"
+                            CzyscGracz4
+                            ReakcjaGracz4Temp = 0
+                            AtakGracz4Temp = 0
+                            ObronaGracz4Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 5 Then
+                        MsgBox "Wróg 1: " & ImieWrog1 & " atakuje " & ImieGracz5
+                        ' Wrog 1 atakuje gracza nr 5
+                        ZywotnoscGracz5 = ZywotnoscGracz5 - ObrazeniaZadanePrzezWroga(ImieWrog1, ImieGracz5, AtakWrog1Temp, ObronaGracz5Temp)
+                        Range("O14").Value = ZywotnoscGracz5
+                        If ZywotnoscGracz5 <= 0 Then
+                            MsgBox ImieWrog1 & " zabija " & ImieGracz5 & "!"
+                            CzyscGracz5
+                            ReakcjaGracz5Temp = 0
+                            AtakGracz5Temp = 0
+                            ObronaGracz5Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+            
+                    ReakcjaWrog1Temp = ReakcjaWrog1Temp - 10
+                    Range("C7").Value = ReakcjaWrog1Temp
+                End If
+    ' Atak 2 wroga
+                If ZywotnoscWrog2 > 0 _
+                And ReakcjaWrog2Temp >= ReakcjaGracz1Temp _
+                And ReakcjaWrog2Temp >= ReakcjaGracz2Temp _
+                And ReakcjaWrog2Temp >= ReakcjaGracz3Temp _
+                And ReakcjaWrog2Temp >= ReakcjaGracz4Temp _
+                And ReakcjaWrog2Temp >= ReakcjaGracz5Temp _
+                And ReakcjaWrog2Temp >= ReakcjaWrog1Temp _
+                And ReakcjaWrog2Temp >= ReakcjaWrog3Temp _
+                And ReakcjaWrog2Temp >= ReakcjaWrog4Temp _
+                And ReakcjaWrog2Temp >= ReakcjaWrog5Temp Then
+                    AtakowanyGracz = AtakWroga
+                    If AtakowanyGracz = 1 Then
+                        MsgBox "Wróg 2: " & ImieWrog2 & " atakuje " & ImieGracz1
+                        ' Wrog 2 atakuje gracza nr 1
+                        ZywotnoscGracz1 = ZywotnoscGracz1 - ObrazeniaZadanePrzezWroga(ImieWrog2, ImieGracz1, AtakWrog2Temp, ObronaGracz1Temp)
+                        Range("C14").Value = ZywotnoscGracz1
+                        If ZywotnoscGracz1 <= 0 Then
+                            MsgBox ImieWrog2 & " zabija " & ImieGracz1 & "!"
+                            CzyscGracz1
+                            ReakcjaGracz1Temp = 0
+                            AtakGracz1Temp = 0
+                            ObronaGracz1Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 2 Then
+                        MsgBox "Wróg 2: " & ImieWrog2 & " atakuje " & ImieGracz2
+                        ' Wrog 2 atakuje gracza nr 2
+                        ZywotnoscGracz2 = ZywotnoscGracz2 - ObrazeniaZadanePrzezWroga(ImieWrog2, ImieGracz2, AtakWrog2Temp, ObronaGracz2Temp)
+                        Range("F14").Value = ZywotnoscGracz2
+                        If ZywotnoscGracz2 <= 0 Then
+                            MsgBox ImieWrog2 & " zabija " & ImieGracz2 & "!"
+                            CzyscGracz2
+                            ReakcjaGracz2Temp = 0
+                            AtakGracz2Temp = 0
+                            ObronaGracz2Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 3 Then
+                        MsgBox "Wróg 2: " & ImieWrog2 & " atakuje " & ImieGracz3
+                        ' Wrog 2 atakuje gracza nr 3
+                        ZywotnoscGracz3 = ZywotnoscGracz3 - ObrazeniaZadanePrzezWroga(ImieWrog2, ImieGracz3, AtakWrog2Temp, ObronaGracz3Temp)
+                        Range("I14").Value = ZywotnoscGracz3
+                        If ZywotnoscGracz3 <= 0 Then
+                            MsgBox ImieWrog2 & " zabija " & ImieGracz3 & "!"
+                            CzyscGracz3
+                            ReakcjaGracz3Temp = 0
+                            AtakGracz3Temp = 0
+                            ObronaGracz3Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 4 Then
+                        MsgBox "Wróg 2: " & ImieWrog2 & " atakuje " & ImieGracz4
+                        ' Wrog 2 atakuje gracza nr 4
+                        ZywotnoscGracz4 = ZywotnoscGracz4 - ObrazeniaZadanePrzezWroga(ImieWrog2, ImieGracz4, AtakWrog2Temp, ObronaGracz4Temp)
+                        Range("L14").Value = ZywotnoscGracz4
+                        If ZywotnoscGracz4 <= 0 Then
+                            MsgBox ImieWrog2 & " zabija " & ImieGracz4 & "!"
+                            CzyscGracz4
+                            ReakcjaGracz4Temp = 0
+                            AtakGracz4Temp = 0
+                            ObronaGracz4Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 5 Then
+                        MsgBox "Wróg 2: " & ImieWrog2 & " atakuje " & ImieGracz5
+                        ' Wrog 2 atakuje gracza nr 5
+                        ZywotnoscGracz5 = ZywotnoscGracz5 - ObrazeniaZadanePrzezWroga(ImieWrog2, ImieGracz5, AtakWrog2Temp, ObronaGracz5Temp)
+                        Range("O14").Value = ZywotnoscGracz5
+                        If ZywotnoscGracz5 <= 0 Then
+                            MsgBox ImieWrog2 & " zabija " & ImieGracz5 & "!"
+                            CzyscGracz5
+                            ReakcjaGracz5Temp = 0
+                            AtakGracz5Temp = 0
+                            ObronaGracz5Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    ReakcjaWrog2Temp = ReakcjaWrog2Temp - 10
+                    Range("F7").Value = ReakcjaWrog2Temp
+                End If
+    ' Atak 3 wroga
+                If ZywotnoscWrog3 > 0 _
+                And ReakcjaWrog3Temp >= ReakcjaGracz1Temp _
+                And ReakcjaWrog3Temp >= ReakcjaGracz2Temp _
+                And ReakcjaWrog3Temp >= ReakcjaGracz3Temp _
+                And ReakcjaWrog3Temp >= ReakcjaGracz4Temp _
+                And ReakcjaWrog3Temp >= ReakcjaGracz5Temp _
+                And ReakcjaWrog3Temp >= ReakcjaWrog1Temp _
+                And ReakcjaWrog3Temp >= ReakcjaWrog2Temp _
+                And ReakcjaWrog3Temp >= ReakcjaWrog4Temp _
+                And ReakcjaWrog3Temp >= ReakcjaWrog5Temp Then
+                    AtakowanyGracz = AtakWroga
+                    If AtakowanyGracz = 1 Then
+                        MsgBox "Wróg 3: " & ImieWrog3 & " atakuje " & ImieGracz1
+                        ' Wrog 3 atakuje gracza nr 1
+                        ZywotnoscGracz1 = ZywotnoscGracz1 - ObrazeniaZadanePrzezWroga(ImieWrog3, ImieGracz1, AtakWrog3Temp, ObronaGracz1Temp)
+                        Range("C14").Value = ZywotnoscGracz1
+                        If ZywotnoscGracz1 <= 0 Then
+                            MsgBox ImieWrog3 & " zabija " & ImieGracz1 & "!"
+                            CzyscGracz1
+                            ReakcjaGracz1Temp = 0
+                            AtakGracz1Temp = 0
+                            ObronaGracz1Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 2 Then
+                        MsgBox "Wróg 3: " & ImieWrog3 & " atakuje " & ImieGracz2
+                        ' Wrog 3 atakuje gracza nr 2
+                        ZywotnoscGracz2 = ZywotnoscGracz2 - ObrazeniaZadanePrzezWroga(ImieWrog3, ImieGracz2, AtakWrog3Temp, ObronaGracz2Temp)
+                        Range("F14").Value = ZywotnoscGracz2
+                        If ZywotnoscGracz2 <= 0 Then
+                            MsgBox ImieWrog3 & " zabija " & ImieGracz2 & "!"
+                            CzyscGracz2
+                            ReakcjaGracz2Temp = 0
+                            AtakGracz2Temp = 0
+                            ObronaGracz2Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 3 Then
+                        MsgBox "Wróg 3: " & ImieWrog3 & " atakuje " & ImieGracz3
+                        ' Wrog 3 atakuje gracza nr 3
+                        ZywotnoscGracz3 = ZywotnoscGracz3 - ObrazeniaZadanePrzezWroga(ImieWrog3, ImieGracz3, AtakWrog3Temp, ObronaGracz3Temp)
+                        Range("I14").Value = ZywotnoscGracz3
+                        If ZywotnoscGracz3 <= 0 Then
+                            MsgBox ImieWrog3 & " zabija " & ImieGracz3 & "!"
+                            CzyscGracz3
+                            ReakcjaGracz3Temp = 0
+                            AtakGracz3Temp = 0
+                            ObronaGracz3Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 4 Then
+                        MsgBox "Wróg 3: " & ImieWrog3 & " atakuje " & ImieGracz4
+                        ' Wrog 3 atakuje gracza nr 4
+                        ZywotnoscGracz4 = ZywotnoscGracz4 - ObrazeniaZadanePrzezWroga(ImieWrog3, ImieGracz4, AtakWrog3Temp, ObronaGracz4Temp)
+                        Range("L14").Value = ZywotnoscGracz4
+                        If ZywotnoscGracz4 <= 0 Then
+                            MsgBox ImieWrog3 & " zabija " & ImieGracz4 & "!"
+                            CzyscGracz4
+                            ReakcjaGracz4Temp = 0
+                            AtakGracz4Temp = 0
+                            ObronaGracz4Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 5 Then
+                        MsgBox "Wróg 3: " & ImieWrog3 & " atakuje " & ImieGracz5
+                        ' Wrog 3 atakuje gracza nr 5
+                        ZywotnoscGracz5 = ZywotnoscGracz5 - ObrazeniaZadanePrzezWroga(ImieWrog3, ImieGracz5, AtakWrog3Temp, ObronaGracz5Temp)
+                        Range("O14").Value = ZywotnoscGracz5
+                        If ZywotnoscGracz5 <= 0 Then
+                            MsgBox ImieWrog3 & " zabija " & ImieGracz5 & "!"
+                            CzyscGracz5
+                            ReakcjaGracz5Temp = 0
+                            AtakGracz5Temp = 0
+                            ObronaGracz5Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    ReakcjaWrog3Temp = ReakcjaWrog3Temp - 10
+                    Range("I7").Value = ReakcjaWrog3Temp
+                End If
+    ' Atak 4 wroga
+                If ZywotnoscWrog4 > 0 _
+                And ReakcjaWrog4Temp >= ReakcjaGracz1Temp _
+                And ReakcjaWrog4Temp >= ReakcjaGracz2Temp _
+                And ReakcjaWrog4Temp >= ReakcjaGracz3Temp _
+                And ReakcjaWrog4Temp >= ReakcjaGracz4Temp _
+                And ReakcjaWrog4Temp >= ReakcjaGracz5Temp _
+                And ReakcjaWrog4Temp >= ReakcjaWrog1Temp _
+                And ReakcjaWrog4Temp >= ReakcjaWrog2Temp _
+                And ReakcjaWrog4Temp >= ReakcjaWrog3Temp _
+                And ReakcjaWrog4Temp >= ReakcjaWrog5Temp Then
+                    AtakowanyGracz = AtakWroga
+                    If AtakowanyGracz = 1 Then
+                        MsgBox "Wróg 4: " & ImieWrog4 & " atakuje " & ImieGracz1
+                        ' Wrog 4 atakuje gracza nr 1
+                        ZywotnoscGracz1 = ZywotnoscGracz1 - ObrazeniaZadanePrzezWroga(ImieWrog4, ImieGracz1, AtakWrog4Temp, ObronaGracz1Temp)
+                        Range("C14").Value = ZywotnoscGracz1
+                        If ZywotnoscGracz1 <= 0 Then
+                            MsgBox ImieWrog4 & " zabija " & ImieGracz1 & "!"
+                            CzyscGracz1
+                            ReakcjaGracz1Temp = 0
+                            AtakGracz1Temp = 0
+                            ObronaGracz1Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 2 Then
+                        MsgBox "Wróg 4: " & ImieWrog4 & " atakuje " & ImieGracz2
+                        ' Wrog 4 atakuje gracza nr 2
+                        ZywotnoscGracz2 = ZywotnoscGracz2 - ObrazeniaZadanePrzezWroga(ImieWrog4, ImieGracz2, AtakWrog4Temp, ObronaGracz2Temp)
+                        Range("F14").Value = ZywotnoscGracz2
+                        If ZywotnoscGracz2 <= 0 Then
+                            MsgBox ImieWrog4 & " zabija " & ImieGracz2 & "!"
+                            CzyscGracz2
+                            ReakcjaGracz2Temp = 0
+                            AtakGracz2Temp = 0
+                            ObronaGracz2Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 3 Then
+                        MsgBox "Wróg 4: " & ImieWrog4 & " atakuje " & ImieGracz3
+                        ' Wrog 4 atakuje gracza nr 3
+                        ZywotnoscGracz3 = ZywotnoscGracz3 - ObrazeniaZadanePrzezWroga(ImieWrog4, ImieGracz3, AtakWrog4Temp, ObronaGracz3Temp)
+                        Range("I14").Value = ZywotnoscGracz3
+                        If ZywotnoscGracz3 <= 0 Then
+                            MsgBox ImieWrog4 & " zabija " & ImieGracz3 & "!"
+                            CzyscGracz3
+                            ReakcjaGracz3Temp = 0
+                            AtakGracz3Temp = 0
+                            ObronaGracz3Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 4 Then
+                        MsgBox "Wróg 4: " & ImieWrog4 & " atakuje " & ImieGracz4
+                        ' Wrog 4 atakuje gracza nr 4
+                        ZywotnoscGracz4 = ZywotnoscGracz4 - ObrazeniaZadanePrzezWroga(ImieWrog4, ImieGracz4, AtakWrog4Temp, ObronaGracz4Temp)
+                        Range("L14").Value = ZywotnoscGracz4
+                        If ZywotnoscGracz4 <= 0 Then
+                            MsgBox ImieWrog4 & " zabija " & ImieGracz4 & "!"
+                            CzyscGracz4
+                            ReakcjaGracz4Temp = 0
+                            AtakGracz4Temp = 0
+                            ObronaGracz4Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 5 Then
+                    MsgBox "Wróg 4: " & ImieWrog4 & " atakuje " & ImieGracz5
+                        ' Wrog 4 atakuje gracza nr 5
+                        ZywotnoscGracz5 = ZywotnoscGracz5 - ObrazeniaZadanePrzezWroga(ImieWrog4, ImieGracz5, AtakWrog4Temp, ObronaGracz5Temp)
+                        Range("O14").Value = ZywotnoscGracz5
+                        If ZywotnoscGracz5 <= 0 Then
+                            MsgBox ImieWrog4 & " zabija " & ImieGracz5 & "!"
+                            CzyscGracz5
+                            ReakcjaGracz5Temp = 0
+                            AtakGracz5Temp = 0
+                            ObronaGracz5Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    ReakcjaWrog4Temp = ReakcjaWrog4Temp - 10
+                    Range("L7").Value = ReakcjaWrog4Temp
+                End If
+    ' Atak 5 wroga
+                If ZywotnoscWrog5 > 0 _
+                And ReakcjaWrog5Temp >= ReakcjaGracz1Temp _
+                And ReakcjaWrog5Temp >= ReakcjaGracz2Temp _
+                And ReakcjaWrog5Temp >= ReakcjaGracz3Temp _
+                And ReakcjaWrog5Temp >= ReakcjaGracz4Temp _
+                And ReakcjaWrog5Temp >= ReakcjaGracz5Temp _
+                And ReakcjaWrog5Temp >= ReakcjaWrog1Temp _
+                And ReakcjaWrog5Temp >= ReakcjaWrog2Temp _
+                And ReakcjaWrog5Temp >= ReakcjaWrog3Temp _
+                And ReakcjaWrog5Temp >= ReakcjaWrog4Temp Then
+                    AtakowanyGracz = AtakWroga
+                    If AtakowanyGracz = 1 Then
+                        MsgBox "Wróg 5: " & ImieWrog5 & " atakuje " & ImieGracz1
+                        ' Wrog 5 atakuje gracza nr 1
+                        ZywotnoscGracz1 = ZywotnoscGracz1 - ObrazeniaZadanePrzezWroga(ImieWrog5, ImieGracz1, AtakWrog5Temp, ObronaGracz1Temp)
+                        Range("C14").Value = ZywotnoscGracz1
+                        If ZywotnoscGracz1 <= 0 Then
+                            MsgBox ImieWrog5 & " zabija " & ImieGracz1 & "!"
+                            CzyscGracz1
+                            ReakcjaGracz1Temp = 0
+                            AtakGracz1Temp = 0
+                            ObronaGracz1Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 2 Then
+                        MsgBox "Wróg 5: " & ImieWrog5 & " atakuje " & ImieGracz2
+                        ' Wrog 5 atakuje gracza nr 2
+                        ZywotnoscGracz2 = ZywotnoscGracz2 - ObrazeniaZadanePrzezWroga(ImieWrog5, ImieGracz2, AtakWrog5Temp, ObronaGracz2Temp)
+                        Range("F14").Value = ZywotnoscGracz2
+                        If ZywotnoscGracz2 <= 0 Then
+                            MsgBox ImieWrog5 & " zabija " & ImieGracz2 & "!"
+                            CzyscGracz2
+                            ReakcjaGracz2Temp = 0
+                            AtakGracz2Temp = 0
+                            ObronaGracz2Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 3 Then
+                        MsgBox "Wróg 5: " & ImieWrog5 & " atakuje " & ImieGracz3
+                        ' Wrog 5 atakuje gracza nr 3
+                        ZywotnoscGracz3 = ZywotnoscGracz3 - ObrazeniaZadanePrzezWroga(ImieWrog5, ImieGracz3, AtakWrog5Temp, ObronaGracz3Temp)
+                        Range("I14").Value = ZywotnoscGracz3
+                        If ZywotnoscGracz3 <= 0 Then
+                            MsgBox ImieWrog5 & " zabija " & ImieGracz3 & "!"
+                            CzyscGracz3
+                            ReakcjaGracz3Temp = 0
+                            AtakGracz3Temp = 0
+                            ObronaGracz3Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 4 Then
+                        MsgBox "Wróg 5: " & ImieWrog5 & " atakuje " & ImieGracz4
+                        ' Wrog 5 atakuje gracza nr 4
+                        ZywotnoscGracz4 = ZywotnoscGracz4 - ObrazeniaZadanePrzezWroga(ImieWrog5, ImieGracz4, AtakWrog5Temp, ObronaGracz4Temp)
+                        Range("L14").Value = ZywotnoscGracz4
+                        If ZywotnoscGracz4 <= 0 Then
+                            MsgBox ImieWrog5 & " zabija " & ImieGracz4 & "!"
+                            CzyscGracz4
+                            ReakcjaGracz4Temp = 0
+                            AtakGracz4Temp = 0
+                            ObronaGracz4Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    If AtakowanyGracz = 5 Then
+                        MsgBox "Wróg 5: " & ImieWrog5 & " atakuje " & ImieGracz5
+                        ' Wrog 5 atakuje gracza nr 5
+                        ZywotnoscGracz5 = ZywotnoscGracz5 - ObrazeniaZadanePrzezWroga(ImieWrog5, ImieGracz5, AtakWrog5Temp, ObronaGracz5Temp)
+                        Range("O14").Value = ZywotnoscGracz5
+                        If ZywotnoscGracz5 <= 0 Then
+                            MsgBox ImieWrog5 & " zabija " & ImieGracz5 & "!"
+                            CzyscGracz5
+                            ReakcjaGracz5Temp = 0
+                            AtakGracz5Temp = 0
+                            ObronaGracz5Temp = 0
+                        End If
+                        If CzyDruzynaAktywna = "Martwa" Then GoTo KoniecWalki
+                    End If
+                    ReakcjaWrog5Temp = ReakcjaWrog5Temp - 10
+                    Range("O7").Value = ReakcjaWrog5Temp
+                End If
+                Kolorowanie
+            Wend
+        
+    ' KONIEC RZECZYWISTEGO BLOKU WALKI
+    
+    ' Pod koniec rundy statystyki na kartach wracaj¹ do wartoœci bazowych
+            Range("C16").Value = ReakcjaGracz1
+            Range("F16").Value = ReakcjaGracz2
+            Range("I16").Value = ReakcjaGracz3
+            Range("L16").Value = ReakcjaGracz4
+            Range("O16").Value = ReakcjaGracz5
+            Range("C7").Value = ReakcjaWrog1
+            Range("F7").Value = ReakcjaWrog2
+            Range("I7").Value = ReakcjaWrog3
+            Range("L7").Value = ReakcjaWrog4
+            Range("O7").Value = ReakcjaWrog5
+            Range("C17").Value = AtakGracz1
+            Range("F17").Value = AtakGracz2
+            Range("I17").Value = AtakGracz3
+            Range("L17").Value = AtakGracz4
+            Range("O17").Value = AtakGracz5
+            Range("C8").Value = AtakWrog1
+            Range("F8").Value = AtakWrog2
+            Range("I8").Value = AtakWrog3
+            Range("L8").Value = AtakWrog4
+            Range("O8").Value = AtakWrog5
+            Range("C18").Value = ObronaGracz1
+            Range("F18").Value = ObronaGracz2
+            Range("I18").Value = ObronaGracz3
+            Range("L18").Value = ObronaGracz4
+            Range("O18").Value = ObronaGracz5
+            Range("C9").Value = ObronaWrog1
+            Range("F9").Value = ObronaWrog2
+            Range("I9").Value = ObronaWrog3
+            Range("L9").Value = ObronaWrog4
+            Range("O9").Value = ObronaWrog5
+    
+        End If
+    Wend
+    
+    ' KONIEC RUNDY WALKI
+    ' KONIEC RUNDY WALKI
+    ' KONIEC RUNDY WALKI
+    
+KoniecWalki:
+    Range("C16").Value = ReakcjaGracz1
+    Range("F16").Value = ReakcjaGracz2
+    Range("I16").Value = ReakcjaGracz3
+    Range("L16").Value = ReakcjaGracz4
+    Range("O16").Value = ReakcjaGracz5
+    Range("C7").Value = ReakcjaWrog1
+    Range("F7").Value = ReakcjaWrog2
+    Range("I7").Value = ReakcjaWrog3
+    Range("L7").Value = ReakcjaWrog4
+    Range("O7").Value = ReakcjaWrog5
+    Range("C17").Value = AtakGracz1
+    Range("F17").Value = AtakGracz2
+    Range("I17").Value = AtakGracz3
+    Range("L17").Value = AtakGracz4
+    Range("O17").Value = AtakGracz5
+    Range("C8").Value = AtakWrog1
+    Range("F8").Value = AtakWrog2
+    Range("I8").Value = AtakWrog3
+    Range("L8").Value = AtakWrog4
+    Range("O8").Value = AtakWrog5
+    Range("C18").Value = ObronaGracz1
+    Range("F18").Value = ObronaGracz2
+    Range("I18").Value = ObronaGracz3
+    Range("L18").Value = ObronaGracz4
+    Range("O18").Value = ObronaGracz5
+    Range("C9").Value = ObronaWrog1
+    Range("F9").Value = ObronaWrog2
+    Range("I9").Value = ObronaWrog3
+    Range("L9").Value = ObronaWrog4
+    Range("O9").Value = ObronaWrog5
+    If CzyWrogowieAktywni = "Martwi" And CzyDruzynaAktywna = "Aktywna" Then
+        MsgBox "Wrogowie martwi!"
+    End If
+    
+    ' PODLICZANIE ZWYCIÊSTW
+    Sheets("Rozgrywka").Select
+    MsgBox "Zwyciêstwa:" & vbNewLine & _
+    Range("C11").Value & ": " & ZwyciestwaGracz1Temp & vbNewLine & _
+    Range("F11").Value & ": " & ZwyciestwaGracz2Temp & vbNewLine & _
+    Range("I11").Value & ": " & ZwyciestwaGracz3Temp & vbNewLine & _
+    Range("L11").Value & ": " & ZwyciestwaGracz4Temp & vbNewLine & _
+    Range("O11").Value & ": " & ZwyciestwaGracz5Temp
+    Sheets("Druzyna").Select
+    Dim ZwyciestwaGracz1Hard As Integer
+    ZwyciestwaGracz1Hard = Range("B14").Value
+    Range("B14").Value = ZwyciestwaGracz1Hard + ZwyciestwaGracz1Temp
+    Dim ZwyciestwaGracz2Hard As Integer
+    ZwyciestwaGracz2Hard = Range("D14").Value
+    Range("D14").Value = ZwyciestwaGracz2Hard + ZwyciestwaGracz2Temp
+    Dim ZwyciestwaGracz3Hard As Integer
+    ZwyciestwaGracz3Hard = Range("F14").Value
+    Range("F14").Value = ZwyciestwaGracz3Hard + ZwyciestwaGracz3Temp
+    Dim ZwyciestwaGracz4Hard As Integer
+    ZwyciestwaGracz4Hard = Range("H14").Value
+    Range("H14").Value = ZwyciestwaGracz4Hard + ZwyciestwaGracz4Temp
+    Dim ZwyciestwaGracz5Hard As Integer
+    ZwyciestwaGracz5Hard = Range("J14").Value
+    Range("J14").Value = ZwyciestwaGracz5Hard + ZwyciestwaGracz5Temp
+    Sheets("Rozgrywka").Select
+    
+    ' PODLICZANIE PUNKTÓW
+    Sheets("Rozgrywka").Select
+    MsgBox "Zdobyte punkty:" & vbNewLine & _
+    Range("C11").Value & ": " & PunktyGracz1Temp & vbNewLine & _
+    Range("F11").Value & ": " & PunktyGracz2Temp & vbNewLine & _
+    Range("I11").Value & ": " & PunktyGracz3Temp & vbNewLine & _
+    Range("L11").Value & ": " & PunktyGracz4Temp & vbNewLine & _
+    Range("O11").Value & ": " & PunktyGracz5Temp
+    Sheets("Druzyna").Select
+    Dim PunktyGracz1Hard As Integer
+    PunktyGracz1Hard = Range("B15").Value
+    Range("B15").Value = PunktyGracz1Hard + PunktyGracz1Temp
+    Dim PunktyGracz2Hard As Integer
+    PunktyGracz2Hard = Range("D15").Value
+    Range("D15").Value = PunktyGracz2Hard + PunktyGracz2Temp
+    Dim PunktyGracz3Hard As Integer
+    PunktyGracz3Hard = Range("F15").Value
+    Range("F15").Value = PunktyGracz3Hard + PunktyGracz3Temp
+    Dim PunktyGracz4Hard As Integer
+    PunktyGracz4Hard = Range("H15").Value
+    Range("H15").Value = PunktyGracz4Hard + PunktyGracz4Temp
+    Dim PunktyGracz5Hard As Integer
+    PunktyGracz5Hard = Range("J15").Value
+    Range("J15").Value = PunktyGracz5Hard + PunktyGracz5Temp
+    Sheets("Rozgrywka").Select
+    
+    
+    If CzyDruzynaAktywna = "Martwa" Then
+        MsgBox "Twoja dru¿yna zginê³a!"
+        
+    End If
+End Sub
+
+Function AtakGracza() As Integer
+
+    Dim Cel As Integer
+    
+PoczatekAtakGracza:
+    
+    Dim Wrog1 As Integer
+    Wrog1 = Range("C6").Value
+    Dim Wrog2 As Integer
+    Wrog2 = Range("F6").Value
+    Dim Wrog3 As Integer
+    Wrog3 = Range("I6").Value
+    Dim Wrog4 As Integer
+    Wrog4 = Range("L6").Value
+    Dim Wrog5 As Integer
+    Wrog5 = Range("O6").Value
+
+    If Wrog1 > 0 Then
+        Cel = MsgBox("Czy atakujesz wroga nr 1 ?", vbYesNo)
+        If Cel = vbYes Then AtakGracza = 1
+        If Cel = vbYes Then GoTo LastLine9
+    End If
+    
+    If Wrog2 > 0 Then
+        Cel = MsgBox("Czy atakujesz wroga nr 2 ?", vbYesNo)
+        If Cel = vbYes Then AtakGracza = 2
+        If Cel = vbYes Then GoTo LastLine9
+    End If
+    
+    If Wrog3 > 0 Then
+        Cel = MsgBox("Czy atakujesz wroga nr 3 ?", vbYesNo)
+        If Cel = vbYes Then AtakGracza = 3
+        If Cel = vbYes Then GoTo LastLine9
+    End If
+    
+    If Wrog4 > 0 Then
+        Cel = MsgBox("Czy atakujesz wroga nr 4 ?", vbYesNo)
+        If Cel = vbYes Then AtakGracza = 4
+        If Cel = vbYes Then GoTo LastLine9
+    End If
+    
+    If Wrog5 > 0 Then
+        Cel = MsgBox("Czy atakujesz wroga nr 5 ?", vbYesNo)
+        If Cel = vbYes Then AtakGracza = 5
+        If Cel = vbYes Then GoTo LastLine9
+    End If
+    
+    If Cel <> 1 And Cel <> 2 And Cel <> 3 And Cel <> 4 And Cel <> 5 Then GoTo PoczatekAtakGracza
+    
+LastLine9:
+
+End Function
+
+Function ObrazeniaZadanePrzezGracza(ImieGracza, ImieWroga, AtakGracza, ObronaWroga) As Integer
+
+    ObrazeniaZadanePrzezGracza = AtakGracza - ObronaWroga
+
+    If ObrazeniaZadanePrzezGracza <= 0 Then ObrazeniaZadanePrzezGracza = 0
+    If ObrazeniaZadanePrzezGracza = 0 Then MsgBox ImieGracza & " chybia " & ImieWroga
+    If ObrazeniaZadanePrzezGracza > 0 Then MsgBox ImieGracza & " zadaje " & ImieWroga & " " & ObrazeniaZadanePrzezGracza & " obra¿eñ"
+
+
+End Function
+
+Function AtakWroga() As Integer
+
+    Dim CelWroga As Integer
+    
+' PoczatekAtakGracza:
+    
+    Dim Gracz1 As Integer
+    Gracz1 = Range("C14").Value
+    Dim Gracz2 As Integer
+    Gracz2 = Range("F14").Value
+    Dim Gracz3 As Integer
+    Gracz3 = Range("I14").Value
+    Dim Gracz4 As Integer
+    Gracz4 = Range("L14").Value
+    Dim Gracz5 As Integer
+    Gracz5 = Range("O14").Value
+
+    Dim CelAtakuWroga As Integer
+    
+PoczatekAtakuWroga:
+    CelAtakuWroga = Losuj(1, 6)
+    
+    If CelAtakuWroga = 1 And Gracz1 <= 0 Then GoTo PoczatekAtakuWroga
+    If CelAtakuWroga = 2 And Gracz2 <= 0 Then GoTo PoczatekAtakuWroga
+    If CelAtakuWroga = 3 And Gracz3 <= 0 Then GoTo PoczatekAtakuWroga
+    If CelAtakuWroga = 4 And Gracz4 <= 0 Then GoTo PoczatekAtakuWroga
+    If CelAtakuWroga = 5 And Gracz5 <= 0 Then GoTo PoczatekAtakuWroga
+    
+    If CelAtakuWroga = 1 And Gracz1 > 0 Then AtakWroga = 1
+    If CelAtakuWroga = 2 And Gracz2 > 0 Then AtakWroga = 2
+    If CelAtakuWroga = 3 And Gracz3 > 0 Then AtakWroga = 3
+    If CelAtakuWroga = 4 And Gracz4 > 0 Then AtakWroga = 4
+    If CelAtakuWroga = 5 And Gracz5 > 0 Then AtakWroga = 5
+
+End Function
+
+Function ObrazeniaZadanePrzezWroga(ImieWroga, ImieGracza, AtakWroga, ObronaGracza) As Integer
+
+    ObrazeniaZadanePrzezWroga = AtakWroga - ObronaGracza
+
+    If ObrazeniaZadanePrzezWroga <= 0 Then ObrazeniaZadanePrzezWroga = 0
+    If ObrazeniaZadanePrzezWroga = 0 Then MsgBox ImieWroga & " chybia " & ImieGracza
+    If ObrazeniaZadanePrzezWroga > 0 Then MsgBox ImieWroga & " zadaje " & ImieGracza & " " & ObrazeniaZadanePrzezWroga & " obra¿eñ"
+
+End Function
+
+' Modu³ 10
+
+Sub ZdarzenieLosowe()
+    Sheets("Druzyna").Select
+    MsgBox "Zdarzenie losowe"
+    Dim ZdarzenieGracz1 As Integer
+    ZdarzenieGracz1 = Range("B13").Value
+    Dim ZdarzenieGracz2 As Integer
+    ZdarzenieGracz2 = Range("D13").Value
+    Dim ZdarzenieGracz3 As Integer
+    ZdarzenieGracz3 = Range("F13").Value
+    Dim ZdarzenieGracz4 As Integer
+    ZdarzenieGracz4 = Range("H13").Value
+    Dim ZdarzenieGracz5 As Integer
+    ZdarzenieGracz5 = Range("J13").Value
+    
+    Dim WyborGracza As String
+    
+    Dim Zdarzenie As Integer
+' Po napisaniu nieznanego runu i eliksiru zmieniæ poni¿szy wiersz na Zdarzenie = Losuj(1, 21)
+    Zdarzenie = Losuj(1, 17)
+    
+    If Zdarzenie = 1 Or Zdarzenie = 2 Or Zdarzenie = 3 Then
+        MsgBox "Znalaz³eœ eliksir pe³nego uzdrowienia"
+        MsgBox "Który bohater ma wypiæ eliksir?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": ¿ywotnoœæ " & Sheets("Rozgrywka").Range("C14").Value & "/" & Sheets("Druzyna").Range("B8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": ¿ywotnoœæ " & Sheets("Rozgrywka").Range("F14").Value & "/" & Sheets("Druzyna").Range("D8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": ¿ywotnoœæ " & Sheets("Rozgrywka").Range("I14").Value & "/" & Sheets("Druzyna").Range("F8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": ¿ywotnoœæ " & Sheets("Rozgrywka").Range("L14").Value & "/" & Sheets("Druzyna").Range("H8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": ¿ywotnoœæ " & Sheets("Rozgrywka").Range("O14").Value & "/" & Sheets("Druzyna").Range("J8").Value
+    
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Rozgrywka").Range("C14").Value = Sheets("Druzyna").Range("B8").Value
+            MsgBox "¯ywotnoœæ " & Sheets("Druzyna").Range("B3").Value & _
+                " osi¹ga maksymalny poziom: " & Sheets("Rozgrywka").Range("C14").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Rozgrywka").Range("F14").Value = Sheets("Druzyna").Range("D8").Value
+            MsgBox "¯ywotnoœæ " & Sheets("Druzyna").Range("D3").Value & _
+                " osi¹ga maksymalny poziom: " & Sheets("Rozgrywka").Range("F14").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Rozgrywka").Range("I14").Value = Sheets("Druzyna").Range("F8").Value
+            MsgBox "¯ywotnoœæ " & Sheets("Druzyna").Range("F3").Value & _
+                " osi¹ga maksymalny poziom: " & Sheets("Rozgrywka").Range("I14").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Rozgrywka").Range("L14").Value = Sheets("Druzyna").Range("H8").Value
+            MsgBox "¯ywotnoœæ " & Sheets("Druzyna").Range("H3").Value & _
+                " osi¹ga maksymalny poziom: " & Sheets("Rozgrywka").Range("L14").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Rozgrywka").Range("O14").Value = Sheets("Druzyna").Range("J8").Value
+            MsgBox "¯ywotnoœæ " & Sheets("Druzyna").Range("J3").Value & _
+                " osi¹ga maksymalny poziom: " & Sheets("Rozgrywka").Range("O14").Value
+        End If
+    End If
+    
+    If Zdarzenie = 4 Then
+        MsgBox "Znalaz³eœ eliksir si³y"
+        MsgBox "Który bohater ma wypiæ eliksir?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Si³a fizyczna " & Sheets("Druzyna").Range("B5").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Si³a fizyczna " & Sheets("Druzyna").Range("D5").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Si³a fizyczna " & Sheets("Druzyna").Range("F5").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Si³a fizyczna " & Sheets("Druzyna").Range("H5").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Si³a fizyczna " & Sheets("Druzyna").Range("J5").Value
+        
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B5").Value = Sheets("Druzyna").Range("B5").Value + 1
+            Sheets("Druzyna").Range("B8").Value = Sheets("Druzyna").Range("B8").Value + 4
+            Sheets("Druzyna").Range("B10").Value = Sheets("Druzyna").Range("B10").Value + 2
+            Sheets("Rozgrywka").Range("C14").Value = Sheets("Rozgrywka").Range("C14").Value + 4
+            MsgBox "Si³a fizyczna " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B5").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D5").Value = Sheets("Druzyna").Range("D5").Value + 1
+            Sheets("Druzyna").Range("D8").Value = Sheets("Druzyna").Range("D8").Value + 4
+            Sheets("Druzyna").Range("D10").Value = Sheets("Druzyna").Range("D10").Value + 2
+            Sheets("Rozgrywka").Range("F14").Value = Sheets("Rozgrywka").Range("F14").Value + 4
+            MsgBox "Si³a fizyczna " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D5").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F5").Value = Sheets("Druzyna").Range("F5").Value + 1
+            Sheets("Druzyna").Range("F8").Value = Sheets("Druzyna").Range("F8").Value + 4
+            Sheets("Druzyna").Range("F10").Value = Sheets("Druzyna").Range("F10").Value + 2
+            Sheets("Rozgrywka").Range("I14").Value = Sheets("Rozgrywka").Range("I14").Value + 4
+            MsgBox "Si³a fizyczna " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F5").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H5").Value = Sheets("Druzyna").Range("H5").Value + 1
+            Sheets("Druzyna").Range("H8").Value = Sheets("Druzyna").Range("H8").Value + 4
+            Sheets("Druzyna").Range("H10").Value = Sheets("Druzyna").Range("H10").Value + 2
+            Sheets("Rozgrywka").Range("L14").Value = Sheets("Rozgrywka").Range("L14").Value + 4
+            MsgBox "Si³a fizyczna " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H5").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J5").Value = Sheets("Druzyna").Range("J5").Value + 1
+            Sheets("Druzyna").Range("J8").Value = Sheets("Druzyna").Range("J8").Value + 4
+            Sheets("Druzyna").Range("J10").Value = Sheets("Druzyna").Range("J10").Value + 2
+            Sheets("Rozgrywka").Range("O14").Value = Sheets("Rozgrywka").Range("O14").Value + 4
+            MsgBox "Si³a fizyczna " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J5").Value
+        End If
+    End If
+    
+    If Zdarzenie = 5 Then
+        MsgBox "Znalaz³eœ eliksir zrêcznoœci"
+        MsgBox "Który bohater ma wypiæ eliksir?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Zrêcznoœæ " & Sheets("Druzyna").Range("B6").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Zrêcznoœæ " & Sheets("Druzyna").Range("D6").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Zrêcznoœæ " & Sheets("Druzyna").Range("F6").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Zrêcznoœæ " & Sheets("Druzyna").Range("H6").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Zrêcznoœæ " & Sheets("Druzyna").Range("J6").Value
+        
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B6").Value = Sheets("Druzyna").Range("B6").Value + 1
+            Sheets("Druzyna").Range("B9").Value = Sheets("Druzyna").Range("B9").Value + 1
+            Sheets("Druzyna").Range("B10").Value = Sheets("Druzyna").Range("B10").Value + 1
+            Sheets("Druzyna").Range("B11").Value = Sheets("Druzyna").Range("B11").Value + 1
+            MsgBox "Zrêcznoœæ " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B6").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D6").Value = Sheets("Druzyna").Range("D6").Value + 1
+            Sheets("Druzyna").Range("D9").Value = Sheets("Druzyna").Range("D9").Value + 1
+            Sheets("Druzyna").Range("D10").Value = Sheets("Druzyna").Range("D10").Value + 1
+            Sheets("Druzyna").Range("D11").Value = Sheets("Druzyna").Range("D11").Value + 1
+            MsgBox "Zrêcznoœæ " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D6").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F6").Value = Sheets("Druzyna").Range("F6").Value + 1
+            Sheets("Druzyna").Range("F9").Value = Sheets("Druzyna").Range("F9").Value + 1
+            Sheets("Druzyna").Range("F10").Value = Sheets("Druzyna").Range("F10").Value + 1
+            Sheets("Druzyna").Range("F11").Value = Sheets("Druzyna").Range("F11").Value + 1
+            MsgBox "Zrêcznoœæ " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F6").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H6").Value = Sheets("Druzyna").Range("H6").Value + 1
+            Sheets("Druzyna").Range("H9").Value = Sheets("Druzyna").Range("H9").Value + 1
+            Sheets("Druzyna").Range("H10").Value = Sheets("Druzyna").Range("H10").Value + 1
+            Sheets("Druzyna").Range("H11").Value = Sheets("Druzyna").Range("H11").Value + 1
+            MsgBox "Zrêcznoœæ " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H6").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J6").Value = Sheets("Druzyna").Range("J6").Value + 1
+            Sheets("Druzyna").Range("J9").Value = Sheets("Druzyna").Range("J9").Value + 1
+            Sheets("Druzyna").Range("J10").Value = Sheets("Druzyna").Range("J10").Value + 1
+            Sheets("Druzyna").Range("J11").Value = Sheets("Druzyna").Range("J11").Value + 1
+            MsgBox "Zrêcznoœæ " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J6").Value
+        End If
+    End If
+    
+    If Zdarzenie = 6 Then
+        MsgBox "Znalaz³eœ eliksir odwagi"
+        MsgBox "Który bohater ma wypiæ eliksir?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Charakter " & Sheets("Druzyna").Range("B7").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Charakter " & Sheets("Druzyna").Range("D7").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Charakter " & Sheets("Druzyna").Range("F7").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Charakter " & Sheets("Druzyna").Range("H7").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Charakter " & Sheets("Druzyna").Range("J7").Value
+        
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B7").Value = Sheets("Druzyna").Range("B7").Value + 1
+            Sheets("Druzyna").Range("B8").Value = Sheets("Druzyna").Range("B8").Value + 4
+            Sheets("Druzyna").Range("B9").Value = Sheets("Druzyna").Range("B9").Value + 1
+            Sheets("Druzyna").Range("B11").Value = Sheets("Druzyna").Range("B11").Value + 1
+            Sheets("Rozgrywka").Range("C14").Value = Sheets("Rozgrywka").Range("C14").Value + 4
+            MsgBox "Charakter " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B7").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D7").Value = Sheets("Druzyna").Range("D7").Value + 1
+            Sheets("Druzyna").Range("D8").Value = Sheets("Druzyna").Range("D8").Value + 4
+            Sheets("Druzyna").Range("D9").Value = Sheets("Druzyna").Range("D9").Value + 1
+            Sheets("Druzyna").Range("D11").Value = Sheets("Druzyna").Range("D11").Value + 1
+            Sheets("Rozgrywka").Range("F14").Value = Sheets("Rozgrywka").Range("F14").Value + 4
+            MsgBox "Charakter " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D7").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F7").Value = Sheets("Druzyna").Range("F7").Value + 1
+            Sheets("Druzyna").Range("F8").Value = Sheets("Druzyna").Range("F8").Value + 4
+            Sheets("Druzyna").Range("F9").Value = Sheets("Druzyna").Range("F9").Value + 1
+            Sheets("Druzyna").Range("F11").Value = Sheets("Druzyna").Range("F11").Value + 1
+            Sheets("Rozgrywka").Range("I14").Value = Sheets("Rozgrywka").Range("I14").Value + 4
+            MsgBox "Charakter " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F7").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H7").Value = Sheets("Druzyna").Range("H7").Value + 1
+            Sheets("Druzyna").Range("H8").Value = Sheets("Druzyna").Range("H8").Value + 4
+            Sheets("Druzyna").Range("H9").Value = Sheets("Druzyna").Range("H9").Value + 1
+            Sheets("Druzyna").Range("H11").Value = Sheets("Druzyna").Range("H11").Value + 1
+            Sheets("Rozgrywka").Range("L14").Value = Sheets("Rozgrywka").Range("L14").Value + 4
+            MsgBox "Charakter " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H7").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J7").Value = Sheets("Druzyna").Range("J7").Value + 1
+            Sheets("Druzyna").Range("J8").Value = Sheets("Druzyna").Range("J8").Value + 4
+            Sheets("Druzyna").Range("J9").Value = Sheets("Druzyna").Range("J9").Value + 1
+            Sheets("Druzyna").Range("J11").Value = Sheets("Druzyna").Range("J11").Value + 1
+            Sheets("Rozgrywka").Range("O14").Value = Sheets("Rozgrywka").Range("O14").Value + 4
+            MsgBox "Charakter " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J7").Value
+        End If
+    End If
+    
+    If Zdarzenie = 7 Or Zdarzenie = 8 Then
+        MsgBox "Znalaz³eœ eliksir wytrzyma³oœci"
+        MsgBox "Który bohater ma wypiæ eliksir?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("B8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("D8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("F8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("H8").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("J8").Value
+    
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B8").Value = Sheets("Druzyna").Range("B8").Value + 4
+            Sheets("Rozgrywka").Range("C14").Value = Sheets("Rozgrywka").Range("C14").Value + 4
+            MsgBox "Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B8").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D8").Value = Sheets("Druzyna").Range("D8").Value + 4
+            Sheets("Rozgrywka").Range("F14").Value = Sheets("Rozgrywka").Range("F14").Value + 4
+            MsgBox "Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D8").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F8").Value = Sheets("Druzyna").Range("F8").Value + 4
+            Sheets("Rozgrywka").Range("I14").Value = Sheets("Rozgrywka").Range("I14").Value + 4
+            MsgBox "Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F8").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H8").Value = Sheets("Druzyna").Range("H8").Value + 4
+            Sheets("Rozgrywka").Range("L14").Value = Sheets("Rozgrywka").Range("L14").Value + 4
+            MsgBox "Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H8").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J8").Value = Sheets("Druzyna").Range("J8").Value + 4
+            Sheets("Rozgrywka").Range("O14").Value = Sheets("Rozgrywka").Range("O14").Value + 4
+            MsgBox "Maksymalna ¿ywotnoœæ " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J8").Value
+        End If
+    End If
+    
+    If Zdarzenie = 9 Or Zdarzenie = 10 Then
+        MsgBox "Znalaz³eœ run poprawiaj¹cy refleks"
+        MsgBox "Który bohater ma wykorzystaæ run?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Reakcja " & Sheets("Druzyna").Range("B9").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Reakcja " & Sheets("Druzyna").Range("D9").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Reakcja " & Sheets("Druzyna").Range("F9").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Reakcja " & Sheets("Druzyna").Range("H9").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Reakcja " & Sheets("Druzyna").Range("J9").Value
+        
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B9").Value = Sheets("Druzyna").Range("B9").Value + 1
+            MsgBox "Reakcja " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B9").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D9").Value = Sheets("Druzyna").Range("D9").Value + 1
+            MsgBox "Reakcja " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D9").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F9").Value = Sheets("Druzyna").Range("F9").Value + 1
+            MsgBox "Reakcja " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F9").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H9").Value = Sheets("Druzyna").Range("H9").Value + 1
+            MsgBox "Reakcja " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H9").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J9").Value = Sheets("Druzyna").Range("J9").Value + 1
+            MsgBox "Reakcja " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J9").Value
+        End If
+    End If
+    
+    If Zdarzenie = 11 Or Zdarzenie = 12 Then
+        MsgBox "Znalaz³eœ run wzmacniaj¹cy broñ"
+        MsgBox "Który bohater ma wykorzystaæ run?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Atak " & Sheets("Druzyna").Range("B10").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Atak " & Sheets("Druzyna").Range("D10").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Atak " & Sheets("Druzyna").Range("F10").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Atak " & Sheets("Druzyna").Range("H10").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Atak " & Sheets("Druzyna").Range("J10").Value
+        
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B10").Value = Sheets("Druzyna").Range("B10").Value + 1
+            MsgBox "Atak " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B10").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D10").Value = Sheets("Druzyna").Range("D10").Value + 1
+            MsgBox "Atak " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D10").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F10").Value = Sheets("Druzyna").Range("F10").Value + 1
+            MsgBox "Atak " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F10").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H10").Value = Sheets("Druzyna").Range("H10").Value + 1
+            MsgBox "Atak " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H10").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J10").Value = Sheets("Druzyna").Range("J10").Value + 1
+            MsgBox "Atak " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J10").Value
+        End If
+    End If
+    
+    If Zdarzenie = 13 Or Zdarzenie = 14 Then
+        MsgBox "Znalaz³eœ run wzmacniaj¹cy zbrojê"
+        MsgBox "Który bohater ma wykorzystaæ run?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Obrona " & Sheets("Druzyna").Range("B11").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Obrona " & Sheets("Druzyna").Range("D11").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Obrona " & Sheets("Druzyna").Range("F11").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Obrona " & Sheets("Druzyna").Range("H11").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Obrona " & Sheets("Druzyna").Range("J11").Value
+        
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Druzyna").Range("B11").Value = Sheets("Druzyna").Range("B11").Value + 1
+            MsgBox "Obrona " & Sheets("Druzyna").Range("B3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("B11").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Druzyna").Range("D11").Value = Sheets("Druzyna").Range("D11").Value + 1
+            MsgBox "Obrona " & Sheets("Druzyna").Range("D3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("D11").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Druzyna").Range("F11").Value = Sheets("Druzyna").Range("F11").Value + 1
+            MsgBox "Obrona " & Sheets("Druzyna").Range("F3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("F11").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Druzyna").Range("H11").Value = Sheets("Druzyna").Range("H11").Value + 1
+            MsgBox "Obrona " & Sheets("Druzyna").Range("H3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("H11").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Druzyna").Range("J11").Value = Sheets("Druzyna").Range("J11").Value + 1
+            MsgBox "Obrona " & Sheets("Druzyna").Range("J3").Value & _
+                " roœnie do " & Sheets("Druzyna").Range("J11").Value
+        End If
+    End If
+    
+    If Zdarzenie = 15 Or Zdarzenie = 16 Then
+        MsgBox "Znalaz³eœ miksturê wzmocnienia"
+        MsgBox "Który bohater ma wypiæ miksturê?" & vbNewLine & _
+        Sheets("Druzyna").Range("B3").Value & ": Aktualna ¿ywotnoœæ " & Sheets("Rozgrywka").Range("C14").Value & vbNewLine & _
+        Sheets("Druzyna").Range("D3").Value & ": Aktualna ¿ywotnoœæ " & Sheets("Rozgrywka").Range("F14").Value & vbNewLine & _
+        Sheets("Druzyna").Range("F3").Value & ": Aktualna ¿ywotnoœæ " & Sheets("Rozgrywka").Range("I14").Value & vbNewLine & _
+        Sheets("Druzyna").Range("H3").Value & ": Aktualna ¿ywotnoœæ " & Sheets("Rozgrywka").Range("L14").Value & vbNewLine & _
+        Sheets("Druzyna").Range("J3").Value & ": Aktualna ¿ywotnoœæ " & Sheets("Rozgrywka").Range("O14").Value
+    
+        WyborGracza = WyborGraczaZdarzenie
+        If WyborGracza = "Gracz1" Then
+            Sheets("Rozgrywka").Range("C14").Value = Sheets("Rozgrywka").Range("C14").Value + 10
+            MsgBox Sheets("Druzyna").Range("B3").Value & _
+                " zyskuje 10 puntów ¿ywotnoœci. Aktualna ¿ywotnoœæ wynosi " & _
+                Sheets("Rozgrywka").Range("C14").Value
+        End If
+        If WyborGracza = "Gracz2" Then
+            Sheets("Rozgrywka").Range("F14").Value = Sheets("Rozgrywka").Range("F14").Value + 10
+            MsgBox Sheets("Druzyna").Range("D3").Value & _
+                " zyskuje 10 puntów ¿ywotnoœci. Aktualna ¿ywotnoœæ wynosi " & _
+                Sheets("Rozgrywka").Range("F14").Value
+        End If
+        If WyborGracza = "Gracz3" Then
+            Sheets("Rozgrywka").Range("I14").Value = Sheets("Rozgrywka").Range("I14").Value + 10
+            MsgBox Sheets("Druzyna").Range("F3").Value & _
+                " zyskuje 10 puntów ¿ywotnoœci. Aktualna ¿ywotnoœæ wynosi " & _
+                Sheets("Rozgrywka").Range("I14").Value
+        End If
+        If WyborGracza = "Gracz4" Then
+            Sheets("Rozgrywka").Range("L14").Value = Sheets("Rozgrywka").Range("L14").Value + 10
+            MsgBox Sheets("Druzyna").Range("H3").Value & _
+                " zyskuje 10 puntów ¿ywotnoœci. Aktualna ¿ywotnoœæ wynosi " & _
+                Sheets("Rozgrywka").Range("L14").Value
+        End If
+        If WyborGracza = "Gracz5" Then
+            Sheets("Rozgrywka").Range("O14").Value = Sheets("Rozgrywka").Range("O14").Value + 10
+            MsgBox Sheets("Druzyna").Range("J3").Value & _
+                " zyskuje 10 puntów ¿ywotnoœci. Aktualna ¿ywotnoœæ wynosi " & _
+                Sheets("Rozgrywka").Range("O14").Value
+        End If
+    End If
+    
+' Nieznany run i nieznana mikstura do napisania po ocenie projektu przez promotora
+
+    If Zdarzenie = 17 Or Zdarzenie = 18 Then
+        MsgBox "Znalaz³eœ nieznany run"
+        
+        WyborGracza = WyborGraczaZdarzenie
+        
+    End If
+    
+    If Zdarzenie = 19 Or Zdarzenie = 20 Then
+        MsgBox "Znalaz³eœ nieznan¹ miksturê"
+        
+        WyborGracza = WyborGraczaZdarzenie
+        
+    End If
+    
+KoniecZdarzenia:
+    
+End Sub
+
+Sub Awans()
+    Sheets("Druzyna").Select
+    Dim Gracz1Poziom As Integer
+    Dim Gracz2Poziom As Integer
+    Dim Gracz3Poziom As Integer
+    Dim Gracz4Poziom As Integer
+    Dim Gracz5Poziom As Integer
+    Gracz1Poziom = Range("B13").Value
+    Gracz2Poziom = Range("D13").Value
+    Gracz3Poziom = Range("F13").Value
+    Gracz4Poziom = Range("H13").Value
+    Gracz5Poziom = Range("J13").Value
+    Dim Gracz1Punkty As Integer
+    Dim Gracz2Punkty As Integer
+    Dim Gracz3Punkty As Integer
+    Dim Gracz4Punkty As Integer
+    Dim Gracz5Punkty As Integer
+    Gracz1Punkty = Range("B15").Value
+    Gracz2Punkty = Range("D15").Value
+    Gracz3Punkty = Range("F15").Value
+    Gracz4Punkty = Range("H15").Value
+    Gracz5Punkty = Range("J15").Value
+    Dim Gracz1Zywotnosc As Integer
+    Dim Gracz2Zywotnosc As Integer
+    Dim Gracz3Zywotnosc As Integer
+    Dim Gracz4Zywotnosc As Integer
+    Dim Gracz5Zywotnosc As Integer
+    Gracz1Zywotnosc = Sheets("Rozgrywka").Range("C14").Value
+    Gracz2Zywotnosc = Sheets("Rozgrywka").Range("F14").Value
+    Gracz3Zywotnosc = Sheets("Rozgrywka").Range("I14").Value
+    Gracz4Zywotnosc = Sheets("Rozgrywka").Range("L14").Value
+    Gracz5Zywotnosc = Sheets("Rozgrywka").Range("O14").Value
+    
+    While Gracz1Punkty >= Gracz1Poziom * 100 And Gracz1Poziom > 0 And Gracz1Zywotnosc > 0
+        Gracz1Poziom = Gracz1Poziom + 1
+        Range("B13").Value = Gracz1Poziom
+        Gracz1Awans
+    Wend
+    While Gracz2Punkty >= Gracz2Poziom * 100 And Gracz2Poziom > 0 And Gracz2Zywotnosc > 0
+        Gracz2Poziom = Gracz2Poziom + 1
+        Range("D13").Value = Gracz2Poziom
+        Gracz2Awans
+    Wend
+    While Gracz3Punkty >= Gracz3Poziom * 100 And Gracz3Poziom > 0 And Gracz3Zywotnosc > 0
+        Gracz3Poziom = Gracz3Poziom + 1
+        Range("F13").Value = Gracz3Poziom
+        Gracz3Awans
+    Wend
+    While Gracz4Punkty >= Gracz4Poziom * 100 And Gracz4Poziom > 0 And Gracz4Zywotnosc > 0
+        Gracz4Poziom = Gracz4Poziom + 1
+        Range("H13").Value = Gracz4Poziom
+        Gracz4Awans
+    Wend
+    While Gracz5Punkty >= Gracz5Poziom * 100 And Gracz5Poziom > 0 And Gracz5Zywotnosc > 0
+        Gracz5Poziom = Gracz5Poziom + 1
+        Range("J13").Value = Gracz5Poziom
+        Gracz5Awans
+    Wend
+    
+End Sub
+
+Sub Gracz1Awans()
+    Dim Imie As String
+    Dim Poziom As Integer
+    Imie = Range("B3").Value
+    Poziom = Range("B13").Value
+    MsgBox Imie & " awansuje na " & Poziom & " poziom!"
+    MsgBox "Ktor¹ cechê chcesz rozwin¹æ?" & vbNewLine & _
+            "Si³ê Fizyczn¹? (+2 Do Ataku i +4 do ¯ywotnoœci)" & vbNewLine & _
+            "Zrêcznoœæ? (+1 do Reakcji, +1 do Ataku i +1 do Obrony)" & vbNewLine & _
+            "Charakter? (+1 do Reakcji, +1 do Obrony i +4 do ¯ywotnoœci)"
+    
+    Dim Rozwoj As String
+PoczatekAwansu1:
+    
+    Wybor = MsgBox("Czy rozwijasz si³ê fizyczn¹?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Sila"
+    If Wybor = vbYes Then GoTo KoniecAwansu1
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz zrêcznoœæ?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Zrecznosc"
+    If Wybor = vbYes Then GoTo KoniecAwansu1
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz charakter?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Charakter"
+    If Wybor = vbNo Then GoTo PoczatekAwansu1
+    
+KoniecAwansu1:
+
+    If Rozwoj = "Sila" Then
+        Range("B5").Value = Range("B5").Value + 1
+        Range("B10").Value = Range("B10").Value + 2
+        Range("B8").Value = Range("B8").Value + 4
+        Sheets("Rozgrywka").Range("C14").Value = Sheets("Rozgrywka").Range("C14").Value + 4
+        MsgBox "Si³a fizyczna " & Range("B3").Value & " wynosi teraz " & Range("B5").Value
+    End If
+    If Rozwoj = "Zrecznosc" Then
+        Range("B6").Value = Range("B6").Value + 1
+        Range("B9").Value = Range("B9").Value + 1
+        Range("B10").Value = Range("B10").Value + 1
+        Range("B11").Value = Range("B11").Value + 1
+        MsgBox "Zrêcznoœæ " & Range("B3").Value & " wynosi teraz " & Range("B6").Value
+    End If
+    If Rozwoj = "Charakter" Then
+        Range("B7").Value = Range("B7").Value + 1
+        Range("B9").Value = Range("B9").Value + 1
+        Range("B11").Value = Range("B11").Value + 1
+        Range("B8").Value = Range("B8").Value + 4
+        Sheets("Rozgrywka").Range("C14").Value = Sheets("Rozgrywka").Range("C14").Value + 4
+        MsgBox "Charakter " & Range("B3").Value & " wynosi teraz " & Range("B7").Value
+    End If
+    
+End Sub
+
+Sub Gracz2Awans()
+    Dim Imie As String
+    Dim Poziom As Integer
+    Imie = Range("D3").Value
+    Poziom = Range("D13").Value
+    MsgBox Imie & " awansuje na " & Poziom & " poziom!"
+    MsgBox "Ktor¹ cechê chcesz rozwin¹æ?" & vbNewLine & _
+            "Si³ê Fizyczn¹? (+2 Do Ataku i +4 do ¯ywotnoœci)" & vbNewLine & _
+            "Zrêcznoœæ? (+1 do Reakcji, +1 do Ataku i +1 do Obrony)" & vbNewLine & _
+            "Charakter? (+1 do Reakcji, +1 do Obrony i +4 do ¯ywotnoœci)"
+    
+    Dim Rozwoj As String
+PoczatekAwansu2:
+    
+    Wybor = MsgBox("Czy rozwijasz si³ê fizyczn¹?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Sila"
+    If Wybor = vbYes Then GoTo KoniecAwansu2
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz zrêcznoœæ?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Zrecznosc"
+    If Wybor = vbYes Then GoTo KoniecAwansu2
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz charakter?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Charakter"
+    If Wybor = vbNo Then GoTo PoczatekAwansu2
+    
+KoniecAwansu2:
+
+    If Rozwoj = "Sila" Then
+        Range("D5").Value = Range("D5").Value + 1
+        Range("D10").Value = Range("D10").Value + 2
+        Range("D8").Value = Range("D8").Value + 4
+        Sheets("Rozgrywka").Range("F14").Value = Sheets("Rozgrywka").Range("F14").Value + 4
+        MsgBox "Si³a fizyczna " & Range("D3").Value & " wynosi teraz " & Range("D5").Value
+    End If
+    If Rozwoj = "Zrecznosc" Then
+        Range("D6").Value = Range("D6").Value + 1
+        Range("D9").Value = Range("D9").Value + 1
+        Range("D10").Value = Range("D10").Value + 1
+        Range("D11").Value = Range("D11").Value + 1
+        MsgBox "Zrêcznoœæ " & Range("D3").Value & " wynosi teraz " & Range("D6").Value
+    End If
+    If Rozwoj = "Charakter" Then
+        Range("D7").Value = Range("D7").Value + 1
+        Range("D9").Value = Range("D9").Value + 1
+        Range("D11").Value = Range("D11").Value + 1
+        Range("D8").Value = Range("D8").Value + 4
+        Sheets("Rozgrywka").Range("F14").Value = Sheets("Rozgrywka").Range("F14").Value + 4
+        MsgBox "Charakter " & Range("D3").Value & " wynosi teraz " & Range("D7").Value
+    End If
+    
+End Sub
+
+Sub Gracz3Awans()
+    Dim Imie As String
+    Dim Poziom As Integer
+    Imie = Range("F3").Value
+    Poziom = Range("F13").Value
+    MsgBox Imie & " awansuje na " & Poziom & " poziom!"
+    MsgBox "Ktor¹ cechê chcesz rozwin¹æ?" & vbNewLine & _
+            "Si³ê Fizyczn¹? (+2 Do Ataku i +4 do ¯ywotnoœci)" & vbNewLine & _
+            "Zrêcznoœæ? (+1 do Reakcji, +1 do Ataku i +1 do Obrony)" & vbNewLine & _
+            "Charakter? (+1 do Reakcji, +1 do Obrony i +4 do ¯ywotnoœci)"
+
+    Dim Rozwoj As String
+PoczatekAwansu3:
+    
+    Wybor = MsgBox("Czy rozwijasz si³ê fizyczn¹?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Sila"
+    If Wybor = vbYes Then GoTo KoniecAwansu3
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz zrêcznoœæ?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Zrecznosc"
+    If Wybor = vbYes Then GoTo KoniecAwansu3
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz charakter?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Charakter"
+    If Wybor = vbNo Then GoTo PoczatekAwansu3
+    
+KoniecAwansu3:
+
+    If Rozwoj = "Sila" Then
+        Range("F5").Value = Range("F5").Value + 1
+        Range("F10").Value = Range("F10").Value + 2
+        Range("F8").Value = Range("F8").Value + 4
+        Sheets("Rozgrywka").Range("I14").Value = Sheets("Rozgrywka").Range("I14").Value + 4
+        MsgBox "Si³a fizyczna " & Range("F3").Value & " wynosi teraz " & Range("F5").Value
+    End If
+    If Rozwoj = "Zrecznosc" Then
+        Range("F6").Value = Range("F6").Value + 1
+        Range("F9").Value = Range("F9").Value + 1
+        Range("F10").Value = Range("F10").Value + 1
+        Range("F11").Value = Range("F11").Value + 1
+        MsgBox "Zrêcznoœæ " & Range("F3").Value & " wynosi teraz " & Range("F6").Value
+    End If
+    If Rozwoj = "Charakter" Then
+        Range("F7").Value = Range("F7").Value + 1
+        Range("F9").Value = Range("F9").Value + 1
+        Range("F11").Value = Range("F11").Value + 1
+        Range("F8").Value = Range("F8").Value + 4
+        Sheets("Rozgrywka").Range("I14").Value = Sheets("Rozgrywka").Range("I14").Value + 4
+        MsgBox "Charakter " & Range("F3").Value & " wynosi teraz " & Range("F7").Value
+    End If
+End Sub
+
+Sub Gracz4Awans()
+    Dim Imie As String
+    Dim Poziom As Integer
+    Imie = Range("H3").Value
+    Poziom = Range("H13").Value
+    MsgBox Imie & " awansuje na " & Poziom & " poziom!"
+    MsgBox "Ktor¹ cechê chcesz rozwin¹æ?" & vbNewLine & _
+            "Si³ê Fizyczn¹? (+2 Do Ataku i +4 do ¯ywotnoœci)" & vbNewLine & _
+            "Zrêcznoœæ? (+1 do Reakcji, +1 do Ataku i +1 do Obrony)" & vbNewLine & _
+            "Charakter? (+1 do Reakcji, +1 do Obrony i +4 do ¯ywotnoœci)"
+
+    Dim Rozwoj As String
+PoczatekAwansu4:
+    
+    Wybor = MsgBox("Czy rozwijasz si³ê fizyczn¹?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Sila"
+    If Wybor = vbYes Then GoTo KoniecAwansu4
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz zrêcznoœæ?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Zrecznosc"
+    If Wybor = vbYes Then GoTo KoniecAwansu4
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz charakter?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Charakter"
+    If Wybor = vbNo Then GoTo PoczatekAwansu4
+    
+KoniecAwansu4:
+
+    If Rozwoj = "Sila" Then
+        Range("H5").Value = Range("H5").Value + 1
+        Range("H10").Value = Range("H10").Value + 2
+        Range("H8").Value = Range("H8").Value + 4
+        Sheets("Rozgrywka").Range("L14").Value = Sheets("Rozgrywka").Range("L14").Value + 4
+        MsgBox "Si³a fizyczna " & Range("H3").Value & " wynosi teraz " & Range("H5").Value
+    End If
+    If Rozwoj = "Zrecznosc" Then
+        Range("H6").Value = Range("H6").Value + 1
+        Range("H9").Value = Range("H9").Value + 1
+        Range("H10").Value = Range("H10").Value + 1
+        Range("H11").Value = Range("H11").Value + 1
+        MsgBox "Zrêcznoœæ " & Range("H3").Value & " wynosi teraz " & Range("H6").Value
+    End If
+    If Rozwoj = "Charakter" Then
+        Range("H7").Value = Range("H7").Value + 1
+        Range("H9").Value = Range("H9").Value + 1
+        Range("H11").Value = Range("H11").Value + 1
+        Range("H8").Value = Range("H8").Value + 4
+        Sheets("Rozgrywka").Range("L14").Value = Sheets("Rozgrywka").Range("L14").Value + 4
+        MsgBox "Charakter " & Range("H3").Value & " wynosi teraz " & Range("H7").Value
+    End If
+End Sub
+
+Sub Gracz5Awans()
+    Dim Imie As String
+    Dim Poziom As Integer
+    Imie = Range("J3").Value
+    Poziom = Range("J13").Value
+    MsgBox Imie & " awansuje na " & Poziom & " poziom!"
+    MsgBox "Ktor¹ cechê chcesz rozwin¹æ?" & vbNewLine & _
+            "Si³ê Fizyczn¹? (+2 Do Ataku i +4 do ¯ywotnoœci)" & vbNewLine & _
+            "Zrêcznoœæ? (+1 do Reakcji, +1 do Ataku i +1 do Obrony)" & vbNewLine & _
+            "Charakter? (+1 do Reakcji, +1 do Obrony i +4 do ¯ywotnoœci)"
+            
+    Dim Rozwoj As String
+PoczatekAwansu5:
+    
+    Wybor = MsgBox("Czy rozwijasz si³ê fizyczn¹?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Sila"
+    If Wybor = vbYes Then GoTo KoniecAwansu5
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz zrêcznoœæ?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Zrecznosc"
+    If Wybor = vbYes Then GoTo KoniecAwansu5
+    If Wybor = vbNo Then Wybor = MsgBox("Czy wybierasz charakter?", vbYesNo)
+    If Wybor = vbYes Then Rozwoj = "Charakter"
+    If Wybor = vbNo Then GoTo PoczatekAwansu5
+    
+KoniecAwansu5:
+
+    If Rozwoj = "Sila" Then
+        Range("J5").Value = Range("J5").Value + 1
+        Range("J10").Value = Range("J10").Value + 2
+        Range("J8").Value = Range("J8").Value + 4
+        Sheets("Rozgrywka").Range("O14").Value = Sheets("Rozgrywka").Range("O14").Value + 4
+        MsgBox "Si³a fizyczna " & Range("J3").Value & " wynosi teraz " & Range("J5").Value
+    End If
+    If Rozwoj = "Zrecznosc" Then
+        Range("J6").Value = Range("J6").Value + 1
+        Range("J9").Value = Range("J9").Value + 1
+        Range("J10").Value = Range("J10").Value + 1
+        Range("J11").Value = Range("J11").Value + 1
+        MsgBox "Zrêcznoœæ " & Range("J3").Value & " wynosi teraz " & Range("J6").Value
+    End If
+    If Rozwoj = "Charakter" Then
+        Range("J7").Value = Range("J7").Value + 1
+        Range("J9").Value = Range("J9").Value + 1
+        Range("J11").Value = Range("J11").Value + 1
+        Range("J8").Value = Range("J8").Value + 4
+        Sheets("Rozgrywka").Range("O14").Value = Sheets("Rozgrywka").Range("O14").Value + 4
+        MsgBox "Charakter " & Range("J3").Value & " wynosi teraz " & Range("J7").Value
+    End If
+End Sub
+
+Function WyborGraczaZdarzenie() As String
+    
+    Dim CzyGracz1Aktywny As Integer
+    Dim CzyGracz2Aktywny As Integer
+    Dim CzyGracz3Aktywny As Integer
+    Dim CzyGracz4Aktywny As Integer
+    Dim CzyGracz5Aktywny As Integer
+    CzyGracz1Aktywny = Sheets("Rozgrywka").Range("C14").Value
+    CzyGracz2Aktywny = Sheets("Rozgrywka").Range("F14").Value
+    CzyGracz3Aktywny = Sheets("Rozgrywka").Range("I14").Value
+    CzyGracz4Aktywny = Sheets("Rozgrywka").Range("L14").Value
+    CzyGracz5Aktywny = Sheets("Rozgrywka").Range("O14").Value
+    
+ZdarzenieGracz1:
+    If CzyGracz1Aktywny > 0 Then
+        WybieraszGracza = MsgBox("Czy bêdzie to " & Range("B3").Value & "?", vbYesNo)
+        If WybieraszGracza = vbYes Then WyborGraczaZdarzenie = "Gracz1"
+        If WybieraszGracza = vbYes Then GoTo KoniecWyborGraczaZdarzenie
+        If WybieraszGracza = vbNo Then GoTo ZdarzenieGracz2
+    End If
+ZdarzenieGracz2:
+    If CzyGracz2Aktywny > 0 Then
+        WybieraszGracza = MsgBox("Czy bêdzie to " & Range("D3").Value & "?", vbYesNo)
+        If WybieraszGracza = vbYes Then WyborGraczaZdarzenie = "Gracz2"
+        If WybieraszGracza = vbYes Then GoTo KoniecWyborGraczaZdarzenie
+        If WybieraszGracza = vbNo Then GoTo ZdarzenieGracz3
+    End If
+ZdarzenieGracz3:
+    If CzyGracz3Aktywny > 0 Then
+        WybieraszGracza = MsgBox("Czy bêdzie to " & Range("F3").Value & "?", vbYesNo)
+        If WybieraszGracza = vbYes Then WyborGraczaZdarzenie = "Gracz3"
+        If WybieraszGracza = vbYes Then GoTo KoniecWyborGraczaZdarzenie
+        If WybieraszGracza = vbNo Then GoTo ZdarzenieGracz4
+    End If
+ZdarzenieGracz4:
+    If CzyGracz4Aktywny > 0 Then
+        WybieraszGracza = MsgBox("Czy bêdzie to " & Range("H3").Value & "?", vbYesNo)
+        If WybieraszGracza = vbYes Then WyborGraczaZdarzenie = "Gracz4"
+        If WybieraszGracza = vbYes Then GoTo KoniecWyborGraczaZdarzenie
+        If WybieraszGracza = vbNo Then GoTo ZdarzenieGracz5
+    End If
+ZdarzenieGracz5:
+    If CzyGracz5Aktywny > 0 Then
+        WybieraszGracza = MsgBox("Czy bêdzie to " & Range("J3").Value & "?", vbYesNo)
+        If WybieraszGracza = vbYes Then WyborGraczaZdarzenie = "Gracz5"
+        If WybieraszGracza = vbYes Then GoTo KoniecWyborGraczaZdarzenie
+        If WybieraszGracza = vbNo Then GoTo ZdarzenieGracz1
+    End If
+GoTo ZdarzenieGracz1
+KoniecWyborGraczaZdarzenie:
+
+End Function
+
+' Modu³ 11
+
+Function Losuj(WartoscMinimalna As Integer, WartoscMaksymalna As Integer) As Integer
+
+Randomize
+Losuj = Int(Rnd * (WartoscMaksymalna - WartoscMinimalna) + WartoscMinimalna)
+
+End Function
+
+Sub TestLosowania()
+
+MsgBox "Ta procedura uruchamia fukcjê Losuj, wprowadzaj¹c jako wartoœci bazowe 1 i 11. Przy takich " _
+        & "wartoœciach funkcja losuje liczbê w przedziale 1 do 10"
+MsgBox Losuj(1, 11)
+
+End Sub
+
+' Modu³ 12
+
+Sub CzyscWrogow()
+'
+' CzyscWrogow Makro
+' To makro czysci karty postaci wrogów po skoñczonej walce
+'
+
+'
+    Sheets("Rozgrywka").Select
+    Range("C4:C9").Select
+    Selection.ClearContents
+    Range("F4:F9").Select
+    Selection.ClearContents
+    Range("I4:I9").Select
+    Selection.ClearContents
+    Range("L4:L9").Select
+    Selection.ClearContents
+    Range("O4:O9").Select
+    Selection.ClearContents
+    Range("A1:O9").Select
+    Range("O9").Activate
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Range("A1").Select
+End Sub
+
+' Modu³ 13
+
+Sub KoniecGry()
+    MsgBox "Koniec Gry!"
+    Dim LiczbaGraczy As Integer
+    Dim LiczbaPunktow As Integer
+    If Sheets("Druzyna").Range("B13").Value > 0 Then LiczbaGraczy = 1
+    If Sheets("Druzyna").Range("D13").Value > 0 Then LiczbaGraczy = 2
+    If Sheets("Druzyna").Range("F13").Value > 0 Then LiczbaGraczy = 3
+    If Sheets("Druzyna").Range("H13").Value > 0 Then LiczbaGraczy = 4
+    If Sheets("Druzyna").Range("J13").Value > 0 Then LiczbaGraczy = 5
+    LiczbaPunktow = _
+    Sheets("Druzyna").Range("B15").Value + Sheets("Druzyna").Range("D15").Value + _
+    Sheets("Druzyna").Range("F15").Value + Sheets("Druzyna").Range("H15").Value + _
+    Sheets("Druzyna").Range("J15").Value
+    MsgBox "Liczba postaci: " & LiczbaGraczy & vbNewLine & "Liczba punktów: " & LiczbaPunktow
+    Sheets("Strona Tytulowa").Select
+    
+    If LiczbaGraczy = 1 Then
+        If LiczbaPunktow > Range("C4").Value Then
+            Range("B4:C12").Select
+            Selection.Copy
+            Range("B5").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C4").Value = LiczbaPunktow
+            Range("B4").Value = ""
+            Range("B4").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C5").Value Then
+            Range("B5:C12").Select
+            Selection.Copy
+            Range("B6").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C5").Value = LiczbaPunktow
+            Range("B5").Value = ""
+            Range("B5").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C6").Value Then
+            Range("B6:C12").Select
+            Selection.Copy
+            Range("B7").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C6").Value = LiczbaPunktow
+            Range("B6").Value = ""
+            Range("B6").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C7").Value Then
+            Range("B7:C12").Select
+            Selection.Copy
+            Range("B8").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C7").Value = LiczbaPunktow
+            Range("B7").Value = ""
+            Range("B7").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C8").Value Then
+            Range("B8:C12").Select
+            Selection.Copy
+            Range("B9").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C8").Value = LiczbaPunktow
+            Range("B8").Value = ""
+            Range("B8").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C9").Value Then
+            Range("B9:C12").Select
+            Selection.Copy
+            Range("B10").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C9").Value = LiczbaPunktow
+            Range("B9").Value = ""
+            Range("B9").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C10").Value Then
+            Range("B10:C12").Select
+            Selection.Copy
+            Range("B11").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C10").Value = LiczbaPunktow
+            Range("B10").Value = ""
+            Range("B10").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C11").Value Then
+            Range("B11:C12").Select
+            Selection.Copy
+            Range("B12").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C11").Value = LiczbaPunktow
+            Range("B11").Value = ""
+            Range("B11").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C12").Value Then
+            Range("B12:C12").Select
+            Selection.Copy
+            Range("B13").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("C12").Value = LiczbaPunktow
+            Range("B12").Value = ""
+            Range("B12").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("C13").Value Then
+            Range("C13").Value = LiczbaPunktow
+            Range("B13").Value = ""
+            Range("B13").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+    End If
+    
+    If LiczbaGraczy = 2 Then
+        If LiczbaPunktow > Range("E4").Value Then
+            Range("D4:E12").Select
+            Selection.Copy
+            Range("D5").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E4").Value = LiczbaPunktow
+            Range("D4").Value = ""
+            Range("D4").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E5").Value Then
+            Range("D5:E12").Select
+            Selection.Copy
+            Range("D6").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E5").Value = LiczbaPunktow
+            Range("D5").Value = ""
+            Range("D5").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E6").Value Then
+            Range("D6:E12").Select
+            Selection.Copy
+            Range("D7").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E6").Value = LiczbaPunktow
+            Range("D6").Value = ""
+            Range("D6").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E7").Value Then
+            Range("D7:E12").Select
+            Selection.Copy
+            Range("D8").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E7").Value = LiczbaPunktow
+            Range("D7").Value = ""
+            Range("D7").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E8").Value Then
+            Range("D8:E12").Select
+            Selection.Copy
+            Range("D9").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E8").Value = LiczbaPunktow
+            Range("D8").Value = ""
+            Range("D8").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E9").Value Then
+            Range("D9:E12").Select
+            Selection.Copy
+            Range("D10").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E9").Value = LiczbaPunktow
+            Range("D9").Value = ""
+            Range("D9").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E10").Value Then
+            Range("D10:E12").Select
+            Selection.Copy
+            Range("D11").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E10").Value = LiczbaPunktow
+            Range("D10").Value = ""
+            Range("D10").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E11").Value Then
+            Range("D11:E12").Select
+            Selection.Copy
+            Range("D12").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E11").Value = LiczbaPunktow
+            Range("D11").Value = ""
+            Range("D11").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E12").Value Then
+            Range("D12:E12").Select
+            Selection.Copy
+            Range("D13").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("E12").Value = LiczbaPunktow
+            Range("D12").Value = ""
+            Range("D12").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("E13").Value Then
+            Range("E13").Value = LiczbaPunktow
+            Range("D13").Value = ""
+            Range("D13").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+    End If
+    
+    If LiczbaGraczy = 3 Then
+        If LiczbaPunktow > Range("G4").Value Then
+            Range("F4:G12").Select
+            Selection.Copy
+            Range("F5").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G4").Value = LiczbaPunktow
+            Range("F4").Value = ""
+            Range("F4").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G5").Value Then
+            Range("F5:G12").Select
+            Selection.Copy
+            Range("F6").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G5").Value = LiczbaPunktow
+            Range("F5").Value = ""
+            Range("F5").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G6").Value Then
+            Range("F6:G12").Select
+            Selection.Copy
+            Range("F7").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G6").Value = LiczbaPunktow
+            Range("F6").Value = ""
+            Range("F6").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G7").Value Then
+            Range("F7:G12").Select
+            Selection.Copy
+            Range("F8").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G7").Value = LiczbaPunktow
+            Range("F7").Value = ""
+            Range("F7").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G8").Value Then
+            Range("F8:G12").Select
+            Selection.Copy
+            Range("F9").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G8").Value = LiczbaPunktow
+            Range("F8").Value = ""
+            Range("F8").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G9").Value Then
+            Range("F9:G12").Select
+            Selection.Copy
+            Range("F10").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G9").Value = LiczbaPunktow
+            Range("F9").Value = ""
+            Range("F9").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G10").Value Then
+            Range("F10:G12").Select
+            Selection.Copy
+            Range("F11").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G10").Value = LiczbaPunktow
+            Range("F10").Value = ""
+            Range("F10").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G11").Value Then
+            Range("F11:G12").Select
+            Selection.Copy
+            Range("F12").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G11").Value = LiczbaPunktow
+            Range("F11").Value = ""
+            Range("F11").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G12").Value Then
+            Range("F12:G12").Select
+            Selection.Copy
+            Range("F13").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("G12").Value = LiczbaPunktow
+            Range("F12").Value = ""
+            Range("F12").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("G13").Value Then
+            Range("G13").Value = LiczbaPunktow
+            Range("F13").Value = ""
+            Range("F13").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+    End If
+    
+    If LiczbaGraczy = 4 Then
+        If LiczbaPunktow > Range("I4").Value Then
+            Range("H4:I12").Select
+            Selection.Copy
+            Range("H5").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I4").Value = LiczbaPunktow
+            Range("H4").Value = ""
+            Range("H4").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I5").Value Then
+            Range("H5:I12").Select
+            Selection.Copy
+            Range("H6").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I5").Value = LiczbaPunktow
+            Range("H5").Value = ""
+            Range("H5").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I6").Value Then
+            Range("H6:I12").Select
+            Selection.Copy
+            Range("H7").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I6").Value = LiczbaPunktow
+            Range("H6").Value = ""
+            Range("H6").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I7").Value Then
+            Range("H7:I12").Select
+            Selection.Copy
+            Range("H8").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I7").Value = LiczbaPunktow
+            Range("H7").Value = ""
+            Range("H7").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I8").Value Then
+            Range("H8:I12").Select
+            Selection.Copy
+            Range("H9").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I8").Value = LiczbaPunktow
+            Range("H8").Value = ""
+            Range("H8").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I9").Value Then
+            Range("H9:I12").Select
+            Selection.Copy
+            Range("H10").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I9").Value = LiczbaPunktow
+            Range("H9").Value = ""
+            Range("H9").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I10").Value Then
+            Range("H10:I12").Select
+            Selection.Copy
+            Range("H11").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I10").Value = LiczbaPunktow
+            Range("H10").Value = ""
+            Range("H10").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I11").Value Then
+            Range("H11:I12").Select
+            Selection.Copy
+            Range("H12").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I11").Value = LiczbaPunktow
+            Range("H11").Value = ""
+            Range("H11").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I12").Value Then
+            Range("H12:I12").Select
+            Selection.Copy
+            Range("H13").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("I12").Value = LiczbaPunktow
+            Range("H12").Value = ""
+            Range("H12").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("I13").Value Then
+            Range("I13").Value = LiczbaPunktow
+            Range("H13").Value = ""
+            Range("H13").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+    End If
+    
+    If LiczbaGraczy = 5 Then
+        If LiczbaPunktow > Range("K4").Value Then
+            Range("J4:K12").Select
+            Selection.Copy
+            Range("J5").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K4").Value = LiczbaPunktow
+            Range("J4").Value = ""
+            Range("J4").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K5").Value Then
+            Range("J5:K12").Select
+            Selection.Copy
+            Range("J6").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K5").Value = LiczbaPunktow
+            Range("J5").Value = ""
+            Range("J5").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K6").Value Then
+            Range("J6:K12").Select
+            Selection.Copy
+            Range("J7").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K6").Value = LiczbaPunktow
+            Range("J6").Value = ""
+            Range("J6").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K7").Value Then
+            Range("J7:K12").Select
+            Selection.Copy
+            Range("J8").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K7").Value = LiczbaPunktow
+            Range("J7").Value = ""
+            Range("J7").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K8").Value Then
+            Range("J8:K12").Select
+            Selection.Copy
+            Range("J9").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K8").Value = LiczbaPunktow
+            Range("J8").Value = ""
+            Range("J8").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K9").Value Then
+            Range("J9:K12").Select
+            Selection.Copy
+            Range("J10").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K9").Value = LiczbaPunktow
+            Range("J9").Value = ""
+            Range("J9").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K10").Value Then
+            Range("J10:K12").Select
+            Selection.Copy
+            Range("J11").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K10").Value = LiczbaPunktow
+            Range("J10").Value = ""
+            Range("J10").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K11").Value Then
+            Range("J11:K12").Select
+            Selection.Copy
+            Range("J12").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K11").Value = LiczbaPunktow
+            Range("J11").Value = ""
+            Range("J11").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K12").Value Then
+            Range("J12:K12").Select
+            Selection.Copy
+            Range("J13").Select
+            ActiveSheet.PasteSpecial Format:=3, Link:=1, DisplayAsIcon:=False, _
+            IconFileName:=False
+            Range("K12").Value = LiczbaPunktow
+            Range("J12").Value = ""
+            Range("J12").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+        If LiczbaPunktow > Range("K13").Value Then
+            Range("K13").Value = LiczbaPunktow
+            Range("J13").Value = ""
+            Range("J13").Value = InputBox("Podaj swoje imiê graczu")
+            GoTo KoniecKoniecGry
+        End If
+    End If
+    
+KoniecKoniecGry:
+Application.CutCopyMode = False
+    
+End Sub
+
+Sub NapisyKoncowe()
+MsgBox "Ukoñczy³eœ grê. Jesteœ wielkim graczem!"
+MsgBox "WalkAbout wersja 1.0" & vbNewLine & _
+        "Zaprojektowa³ i zakodowa³ Tomasz Kry³owski"
+MsgBox "Grê dedykujê swojej ¿onie Joannie Kry³owskiej oraz córkom Annie i £ucji Kry³owskiej"
+MsgBox "Podziêkowania dla:" & vbNewLine & _
+        "Andras Radocz" & vbNewLine & "Steve Bagnall" & vbNewLine & "Ewa Szymków" & vbNewLine & _
+        "Jan Kry³owski" & vbNewLine & "Dr Pawe³ B³a¿ej"
+MsgBox "Specjalne podziêkowania dla:" & vbNewLine & "Mgr Pawe³ Rzechonek"
+
+End Sub
+
+Sub DodatkowePunkty()
+    MsgBox "Dodatkowe 100 punktów dla ka¿dego bohatera!"
+    If Sheets("Rozgrywka").Range("C14").Value > 0 Then Sheets("Druzyna").Range("B15").Value = Sheets("Druzyna").Range("B15").Value + 100
+    If Sheets("Rozgrywka").Range("F14").Value > 0 Then Sheets("Druzyna").Range("D15").Value = Sheets("Druzyna").Range("D15").Value + 100
+    If Sheets("Rozgrywka").Range("I14").Value > 0 Then Sheets("Druzyna").Range("F15").Value = Sheets("Druzyna").Range("F15").Value + 100
+    If Sheets("Rozgrywka").Range("L14").Value > 0 Then Sheets("Druzyna").Range("H15").Value = Sheets("Druzyna").Range("H15").Value + 100
+    If Sheets("Rozgrywka").Range("O14").Value > 0 Then Sheets("Druzyna").Range("J15").Value = Sheets("Druzyna").Range("J15").Value + 100
+
+End Sub
+
+' Modu³ 14
+
+Sub CzyscWrog1()
+    Range("C4:C9").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscWrog2()
+    Range("F4:F9").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscWrog3()
+    Range("I4:I9").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscWrog4()
+    Range("L4:L9").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscWrog5()
+    Range("O4:O9").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscGracz1()
+    Range("C11:C18").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscGracz2()
+    Range("F11:F18").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscGracz3()
+    Range("I11:I18").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscGracz4()
+    Range("L11:L18").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Sub CzyscGracz5()
+    Range("O11:O18").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
